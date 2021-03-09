@@ -1,0 +1,47 @@
+# namespace
+- query: "SELECT *
+            FROM namespace
+            WHERE
+                namespace = '{{params.namespace}}'
+                AND deleted = 0"
+  map_def:
+      - name: sql_namespaces
+        key:
+            - "$@.namespace"
+        value: "$@"
+
+# app
+- query: "SELECT *
+            FROM app
+            WHERE
+                namespace = '{{params.namespace}}'
+                AND deleted = 0"
+  map_def:
+      - name: sql_apps
+        key:
+            - "$@.namespace"
+            - "$@.app_name"
+            - "$@.app_ver"
+        value: "$@"
+
+# app_runtime
+- query: "SELECT *
+            FROM app_runtime
+            WHERE
+                namespace = '{{params.namespace}}'
+                AND deleted = 0"
+  map_def:
+      - name: sql_app_runtimes
+        key:
+            - "$@.namespace"
+            - "$@.app_name"
+            - "$@.app_runtime"
+        value: "$@"
+
+      - name: sql_app_runtime_by_app_ver
+        key:
+            - "$@.namespace"
+            - "$@.app_name"
+            - "$@.app_ver"
+            - "$@.app_runtime"
+        value: "$@"

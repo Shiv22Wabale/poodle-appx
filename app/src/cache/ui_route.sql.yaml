@@ -1,0 +1,76 @@
+# namespace
+- query: "SELECT *
+            FROM namespace
+            WHERE
+                namespace = '{{params.namespace}}'
+                AND deleted = 0"
+  map_def:
+      - name: sql_namespaces
+        key:
+            - "$@.namespace"
+        value: "$@"
+
+# ui
+- query: "SELECT *
+            FROM ui
+            WHERE
+                namespace = '{{params.namespace}}'
+                AND ui_name = '{{params.ui_name}}'
+                AND ui_ver = '{{params.ui_ver}}'
+                AND deleted = 0"
+  map_def:
+      - name: sql_uis
+        key:
+            - "$@.namespace"
+            - "$@.ui_name"
+            - "$@.ui_ver"
+        value: "$@"
+
+# ui_deployment
+- query: "SELECT *
+            FROM ui_deployment
+            WHERE
+                namespace = '{{params.namespace}}'
+                AND ui_name = '{{params.ui_name}}'
+                AND ui_deployment = '{{params.ui_deployment}}'
+                AND deleted = 0"
+  map_def:
+      - name: sql_ui_deployments
+        key:
+            - "$@.namespace"
+            - "$@.ui_name"
+            - "$@.ui_deployment"
+        value: "$@"
+
+
+# ui_route
+- query: "SELECT
+                ui_route.id,
+                ui_route.namespace,
+                ui_route.ui_name,
+                ui_route.ui_ver,
+                ui_deployment.ui_deployment,
+                ui_route.ui_route_name,
+                ui_route.ui_route_spec,
+                ui_route.create_time,
+                ui_route.update_time,
+                ui_route.deleted
+            FROM ui_route
+            JOIN ui_deployment
+                ON ui_route.namespace = ui_deployment.namespace
+                AND ui_route.ui_name = ui_deployment.ui_name
+                AND ui_route.ui_ver = ui_deployment.ui_ver
+            WHERE
+                ui_route.namespace = '{{params.namespace}}'
+                AND ui_route.ui_name = '{{params.ui_name}}'
+                AND ui_deployment.ui_deployment = '{{params.ui_deployment}}'
+                AND ui_route.deleted = 0
+                AND ui_deployment.deleted = 0"
+  map_def:
+      - name: sql_ui_routes
+        key:
+            - "$@.namespace"
+            - "$@.ui_name"
+            - "$@.ui_deployment"
+            - "$@.ui_route_name"
+        value: "$@"

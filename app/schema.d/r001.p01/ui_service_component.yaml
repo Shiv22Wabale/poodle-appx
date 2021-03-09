@@ -1,0 +1,438 @@
+ui_component:
+  - namespace: sys
+    ui_name: service
+    ui_ver: internal
+    ui_component_name: /Router
+    ui_component_type: react/component
+    ui_component_spec:
+      styles:
+        root:
+          color:
+            data: theme.palette.text.primary
+            _type: js/expression
+          height: 100%
+          backgroundColor:
+            data: theme.palette.background.paper
+            _type: js/expression
+        _type: mui/style
+        _order: 1
+      component:
+        name: react-redux.Provider
+        _type: react/element
+        props:
+          store:
+            name: app-x/redux/store
+            _type: js/import
+        _order: 2
+        children:
+          - name: app-x/theme/GlobalStyleProvider
+            _type: react/element
+            children:
+              - name: self/page/MobileNavProvider
+                _type: react/element
+                children:
+                  - name: app-x/route/RouterProvider
+                    _type: react/element
+                    children:
+                      - name: react-router-dom.Routes
+                        _type: react/element
+                        children:
+                          - path: /
+                            _type: route/path
+                            element:
+                              name: self/page/Console
+                              _type: react/element
+                          - path: "*"
+                            _type: route/path
+                            element:
+                              name: antd.Layout
+                              _type: react/element
+                              children:
+                                - name: antd.Layout.Header
+                                  _type: react/element
+                                  children:
+                                    - name: self/page/Header
+                                      _type: react/element
+                                - name: antd.Layout.Content
+                                  _type: react/element
+                                  children:
+                                    - name: app-x/page/error/NotFoundView
+                                      _type: react/element
+  - namespace: sys
+    ui_name: service
+    ui_ver: internal
+    ui_component_name: /nav/appNav
+    ui_component_type: react/component
+    ui_component_spec:
+      _test:
+        providers:
+          - name: react-redux.Provider
+            _type: react/element
+            props:
+              store:
+                name: app-x/redux/store
+                _type: js/import
+          - name: app-x/theme/GlobalStyleProvider
+            _type: react/element
+            props:
+              theme:
+                name: app-x/theme
+                _type: js/import
+          - name: app-x/route/RouterProvider
+            _type: react/element
+      styles:
+        root:
+          color:
+            data: theme.palette.text.primary
+            _type: js/expression
+          width: 100%
+          backgroundColor:
+            data: theme.palette.background.paper
+            _type: js/expression
+        _type: mui/style
+        _order: 1
+      component:
+        name: "@material-ui/core.List"
+        _type: react/element
+        props:
+          className:
+            data: styles.root
+            _type: js/expression
+          component: nav
+          subheader:
+            name: "@material-ui/core.ListSubheader"
+            _type: react/element
+            children:
+              - App Builder
+          aria-labelledby: App Builder
+        _order: 2
+        children:
+          - name: app-x/route/RouterProvider.Link
+            _type: react/element
+            props:
+              to: /app/customers
+            children:
+              - name: "@material-ui/core.ListItem"
+                _type: react/element
+                props:
+                  button: true
+                children:
+                  - name: "@material-ui/core.ListItemIcon"
+                    _type: react/element
+                    children:
+                      - name: "@material-ui/icons.Link"
+                        _type: react/element
+                  - name: "@material-ui/core.ListItemText"
+                    _type: react/element
+                    props:
+                      primary: Relations
+          - name: app-x/route/RouterProvider.Link
+            _type: react/element
+            props:
+              to: /app/dashboard
+            children:
+              - name: "@material-ui/core.ListItem"
+                _type: react/element
+                props:
+                  button: true
+                children:
+                  - name: "@material-ui/core.ListItemIcon"
+                    _type: react/element
+                    children:
+                      - name: "@material-ui/icons.ViewModule"
+                        _type: react/element
+                  - name: "@material-ui/core.ListItemText"
+                    _type: react/element
+                    props:
+                      primary: Objects
+          - name: app-x/route/RouterProvider.Link
+            _type: react/element
+            props:
+              to: /app/products
+            children:
+              - name: "@material-ui/core.ListItem"
+                _type: react/element
+                props:
+                  button: true
+                children:
+                  - name: "@material-ui/core.ListItemIcon"
+                    _type: react/element
+                    children:
+                      - name: "@material-ui/icons.VerticalAlignCenter"
+                        _type: react/element
+                  - name: "@material-ui/core.ListItemText"
+                    _type: react/element
+                    props:
+                      primary: APIs
+  - namespace: sys
+    ui_name: service
+    ui_ver: internal
+    ui_component_name: /page/Console
+    ui_component_type: react/component
+    ui_component_spec:
+      _test:
+        providers:
+          - name: react-redux.Provider
+            _type: react/element
+            props:
+              store:
+                name: app-x/redux/store
+                _type: js/import
+          - name: app-x/theme/GlobalStyleProvider
+            _type: react/element
+            props:
+              theme:
+                name: app-x/theme
+                _type: js/import
+          - name: self/page/MobileNavProvider
+            _type: react/element
+          - name: app-x/route/RouterProvider
+            _type: react/element
+      theme:
+        _type: mui/theme
+        _order: 1
+      appNav:
+        name: self/nav/appNav
+        _type: react/element
+        _order: 2
+      styles:
+        _type: mui/style
+        _order: 3
+        sideNav:
+          width: 280
+          height: 100%
+          backgroundColor:
+            data: theme.palette.background.paper
+            _type: js/expression
+      component:
+        name: antd.Layout
+        _type: react/element
+        style:
+          height: 100%
+        _order: 5
+        children:
+          - name: antd.Layout.Header
+            _type: react/element
+            children:
+              - name: self/page/Header
+                _type: react/element
+          - name: antd.Layout.Content
+            _type: react/element
+            children:
+              - name: antd.Layout
+                _type: react/element
+                style:
+                  height: 100%
+                children:
+                  - name: "@material-ui/core.Hidden"
+                    _type: react/element
+                    props:
+                      lgUp: true
+                      className:
+                        data: styles.sideNav
+                        _type: js/expression
+                    children:
+                      - name: "@material-ui/core.Drawer"
+                        _type: react/element
+                        props:
+                          open:
+                            data: mobileNav.open
+                            _type: js/expression
+                          anchor: left
+                          classes:
+                            data: "{paper: styles.sideNav}"
+                            _type: js/expression
+                          onClose:
+                            data: e => mobileNav.setOpen(false)
+                            _type: js/expression
+                        children:
+                          - data: appNav
+                            _type: js/expression
+                  - name: "@material-ui/core.Hidden"
+                    _type: react/element
+                    props:
+                      mdDown: true
+                    children:
+                      - name: antd.Layout.Sider
+                        _type: react/element
+                        props:
+                          width: 280
+                          className:
+                            data: styles.sideNav
+                            _type: js/expression
+                        children:
+                          - data: appNav
+                            _type: js/expression
+                  - name: antd.Layout.Content
+                    _type: react/element
+                    children:
+                      - name: "@material-ui/core.Box"
+                        _type: react/element
+                        props:
+                          height: 100%
+                          display: flex
+                          alignItems: center
+                          justifyContent: center
+                        style:
+                          backgroundColor:
+                            data: theme.palette.background.default
+                            _type: js/expression
+                        children:
+                          - name: "@material-ui/core.Typography"
+                            _type: react/element
+                            children:
+                              - Hello, World!
+      mobileNav:
+        name: self/page/MobileNavProvider.Context
+        _type: react/context
+        _order: 4
+  - namespace: sys
+    ui_name: service
+    ui_ver: internal
+    ui_component_name: /page/Header
+    ui_component_type: react/component
+    ui_component_spec:
+      _test:
+        providers:
+          - name: react-redux.Provider
+            _type: react/element
+            props:
+              store:
+                name: app-x/redux/store
+                _type: js/import
+          - name: self/page/MobileNavProvider
+            _type: react/element
+          - name: app-x/theme/GlobalStyleProvider
+            _type: react/element
+            props:
+              theme:
+                name: app-x/theme
+                _type: js/import
+          - name: app-x/route/RouterProvider
+            _type: react/element
+      theme:
+        _type: mui/theme
+        _order: 1
+      router:
+        name: app-x/route/RouterProvider.Context
+        _type: route/context
+        _order: 3
+      styles:
+        _type: mui/style
+        _order: 2
+        avatar:
+          backgroundColor:
+            data: theme.palette.primary.light
+            _type: js/expression
+      component:
+        name: "@material-ui/core.AppBar"
+        _type: react/element
+        props:
+          elevation: 0
+        _order: 5
+        children:
+          - name: "@material-ui/core.Toolbar"
+            _type: react/element
+            children:
+              - name: "@material-ui/core.Fab"
+                _type: react/element
+                props:
+                  size: small
+                  color: primary
+                  onClick:
+                    data: e => router.hnavigate('sys', 'console', 'base', '/console')
+                    _type: js/expression
+                  className:
+                    data: styles.avatar
+                    _type: js/expression
+                style:
+                  boxShadow: none
+                children:
+                  - name: "@material-ui/icons.ViewQuiltRounded"
+                    _type: react/element
+              - name: "@material-ui/core.Fab"
+                _type: react/element
+                props:
+                  size: medium
+                  color: primary
+                  onClick:
+                    data: e => router.navigate('/')
+                    _type: js/expression
+                  variant: extended
+                style:
+                  margin:
+                    data: theme.spacing(1)
+                    _type: js/expression
+                  boxShadow: none
+                children:
+                  - Service Builder
+              - name: "@material-ui/core.Box"
+                _type: react/element
+                props:
+                  flexGrow: 1
+              - name: app-x/util/UserBadge
+                _type: react/element
+                props:
+                  auth:
+                    data: "{namespace:'sys',ui_name:'console',ui_deployment:'base'}"
+                    _type: js/expression
+                  realm: main
+                  authUrl: /login
+                  elevation: 0
+              - name: app-x/util/ThemeBadge
+                _type: react/element
+                style:
+                  margin:
+                    data: theme.spacing(1)
+                    _type: js/expression
+              - name: "@material-ui/core.Hidden"
+                _type: react/element
+                props:
+                  lgUp: true
+                children:
+                  - name: "@material-ui/core.Fab"
+                    _type: react/element
+                    props:
+                      size: small
+                      color: primary
+                      onClick:
+                        data: e => mobileNav.toggle()
+                        _type: js/expression
+                    style:
+                      boxShadow: none
+                    children:
+                      - name: "@material-ui/icons.Menu"
+                        _type: react/element
+      mobileNav:
+        name: self/page/MobileNavProvider.Context
+        _type: react/context
+        _order: 4
+  - namespace: sys
+    ui_name: service
+    ui_ver: internal
+    ui_component_name: /page/MobileNavProvider
+    ui_component_type: react/provider
+    ui_component_spec:
+      toggle:
+        body:
+          - setOpen(!open)
+        _type: js/function
+        _order: 2
+      ...open:
+        init: "false"
+        name: open
+        _type: react/state
+        _order: 1
+        setter: setOpen
+      provider:
+        open:
+          data: open
+          _type: js/expression
+        _order: 3
+        toggle:
+          data: toggle
+          _type: js/expression
+        setOpen:
+          data: setOpen
+          _type: js/expression
+

@@ -1,0 +1,60 @@
+# namespace
+- query: "SELECT *
+            FROM namespace
+            WHERE
+                namespace = '{{params.namespace}}'
+                AND deleted = 0"
+  map_def:
+      - name: sql_namespaces
+        key:
+            - "$@.namespace"
+        value: "$@"
+
+# ui
+- query: "SELECT *
+            FROM ui
+            WHERE
+                namespace = '{{params.namespace}}'
+                AND deleted = 0"
+  map_def:
+      - name: sql_uis
+        key:
+            - "$@.namespace"
+            - "$@.ui_name"
+            - "$@.ui_ver"
+        value: "$@"
+
+# ui_deployment
+- query: "SELECT
+                ui_deployment.id,
+                ui_deployment.namespace,
+                ui_deployment.ui_name,
+                ui_deployment.ui_deployment,
+                ui_deployment.ui_ver,
+                ui.ui_spec,
+                ui_deployment.ui_deployment_spec,
+                ui_deployment.deleted
+            FROM ui_deployment
+            JOIN ui
+                ON ui.namespace = ui_deployment.namespace
+                AND ui.ui_name = ui_deployment.ui_name
+                AND ui.ui_ver = ui_deployment.ui_ver
+            WHERE
+                ui_deployment.namespace = '{{params.namespace}}'
+                AND ui_deployment.deleted = 0
+                AND ui.deleted = 0"
+  map_def:
+      - name: sql_ui_deployments
+        key:
+            - "$@.namespace"
+            - "$@.ui_name"
+            - "$@.ui_deployment"
+        value: "$@"
+
+      - name: sql_ui_deployments_by_ui_ver
+        key:
+            - "$@.namespace"
+            - "$@.ui_name"
+            - "$@.ui_ver"
+            - "$@.ui_deployment"
+        value: "$@"

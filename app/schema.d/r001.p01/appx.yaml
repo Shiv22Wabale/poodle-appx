@@ -1,0 +1,529 @@
+######################################################################
+# global
+global:
+    version: "r001.p01"
+    schema_prefix: "{{{MYSQL_CONF.schema_prefix}}}"
+    schema_separator: "{{{MYSQL_CONF.schema_separator}}}"
+
+######################################################################
+# metadata
+_appx_meta:
+    - meta_name: "appx.version"
+      meta_key: "{{{global.version}}}"
+      meta_info:
+          comment: "initialize"
+    - meta_name: "appx.schema"
+      meta_key: "prefix"
+      meta_info:
+          value: "{{{MYSQL_CONF.schema_prefix}}}"
+          comment: "initialize"
+    - meta_name: "appx.schema"
+      meta_key: "separator"
+      meta_info:
+          value: "{{{MYSQL_CONF.schema_separator}}}"
+          comment: "initialize"
+
+######################################################################
+# realm
+_realm:
+    - realm: "main"
+      realm_key: "UNHEX(CONCAT(SUBSTRING(SHA2(CAST(RAND() * 1000 * 1000 as CHAR), 256), 2, 32), SUBSTRING(SHA2(CAST(RAND() * 1000 as CHAR), 256), 2, 32)))"
+      realm_spec:
+          comment: "initialize [appx] realm"
+
+######################################################################
+# user
+_realm_user:
+    - realm: "main"
+      username: "{{{MYSQL_CONF.appx_node_user}}}"
+      password: 'SHA2("{{{MYSQL_CONF.appx_node_pass}}}", 256)'
+      user_spec:
+          comment: "initialize admin user: {{{MYSQL_CONF.appx_node_user}}}"
+
+######################################################################
+# _realm_module
+_realm_module:
+    # local auth
+    - realm: "main"
+      module_name: "00.appx.local"
+      module_pattern: "^(.+)\\@LOCAL$"
+      module_spec:
+          protocol: "local_db"
+          auth_name_match: 1
+          local_db:
+              table: "_realm_user"
+              field:
+                  realm: realm
+                  username: username
+                  password: password
+          comment: "initialize auth module [appx.local]"
+    # ldap auth
+    - realm: "main"
+      module_name: "10.appx.ldap"
+      module_priority: 10
+      module_pattern: "^(.+)\\@LDAP$"
+      module_spec:
+          protocol: "ldap"
+          auth_name_match: 1
+          ldap:
+              conf: ldap_appx.json
+              base_dn: "{{{LDAP_CONF.base_dn}}}"
+              search: "(&(objectClass=person)(cn=${username}))"
+              group_attr: "memberOf"
+              group_pattern: "^cn=([^,]+)(,(.+))?$"
+              group_name_match: 1
+          comment: "initialize auth module [appx.ldap_user]"
+    # google auth
+    - realm: "main"
+      module_name: "20.appx.google"
+      module_pattern: "^(.+)$"
+      module_spec:
+          protocol: "google"
+          auth_name_match: 1
+          google:
+              some_key: "some_key"
+              some_other_key: "some_other_key"
+          comment: "initialize auth module [appx.google]"
+    # facebook auth
+    - realm: "main"
+      module_name: "21.appx.facebook"
+      module_pattern: "^(.+)$"
+      module_spec:
+          protocol: "facebook"
+          auth_name_match: 1
+          facebook:
+              some_key: "some_key"
+              some_other_key: "some_other_key"
+          comment: "initialize auth module [appx.facebook]"
+    # github auth
+    - realm: "main"
+      module_name: "22.appx.github"
+      module_pattern: "^(.+)$"
+      module_spec:
+          protocol: "github"
+          auth_name_match: 1
+          github:
+              some_key: "some_key"
+              some_other_key: "some_other_key"
+          comment: "initialize auth module [appx.facebook]"
+
+######################################################################
+# _realm_app
+_realm_app:
+    - namespace: "sys"
+      app_name: "appx"
+      realm: "main"
+      realm_app_spec:
+          comment: "initialize auth app realm"
+
+######################################################################
+# _auth_grant
+_auth_grant:
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "superadmin"
+      grant_type: "user"
+      grant_name: "{{{MYSQL_CONF.appx_node_user}}}@LOCAL"
+      grant_spec:
+          comment: "initialize {{{MYSQL_CONF.appx_node_user}}}@LOCAL"
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "dev.fullstack"
+      grant_type: "user"
+      grant_name: "centos@LDAP"
+      grant_spec:
+          comment: "initialize centos@LDAP"
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "agent"
+      grant_type: "user"
+      grant_name: "agent@LDAP"
+      grant_spec:
+          comment: "initialize agent@LDAP"
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "dev.ui"
+      grant_type: "user"
+      grant_name: "appx@LDAP"
+      grant_spec:
+          comment: "initialize appx@LDAP"
+
+######################################################################
+# _perm_func
+_auth_func_perm:
+    # superadmin role
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "superadmin"
+      auth_func_name: "app.read"
+      auth_func_spec:
+          comment: "initialize"
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "superadmin"
+      auth_func_name: "app.write"
+      auth_func_spec:
+          comment: "initialize"
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "superadmin"
+      auth_func_name: "app.status"
+      auth_func_spec:
+          comment: "initialize"
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "superadmin"
+      auth_func_name: "ui.read"
+      auth_func_spec:
+          comment: "initialize"
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "superadmin"
+      auth_func_name: "ui.write"
+      auth_func_spec:
+          comment: "initialize"
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "superadmin"
+      auth_func_name: "ui.status"
+      auth_func_spec:
+          comment: "initialize"
+    # admin role
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "dev.fullstack"
+      auth_func_name: "app.read"
+      auth_func_spec:
+          comment: "initialize"
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "dev.fullstack"
+      auth_func_name: "app.write"
+      auth_func_spec:
+          comment: "initialize"
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "dev.fullstack"
+      auth_func_name: "ui.read"
+      auth_func_spec:
+          comment: "initialize"
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "dev.fullstack"
+      auth_func_name: "ui.write"
+      auth_func_spec:
+          comment: "initialize"
+    # app dev role
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "dev.app"
+      auth_func_name: "app.read"
+      auth_func_spec:
+          comment: "initialize"
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "dev.app"
+      auth_func_name: "app.write"
+      auth_func_spec:
+          comment: "initialize"
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "dev.app"
+      auth_func_name: "ui.read"
+      auth_func_spec:
+          comment: "initialize"
+    # ui dev role
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "dev.ui"
+      auth_func_name: "app.read"
+      auth_func_spec:
+          comment: "initialize"
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "dev.ui"
+      auth_func_name: "ui.read"
+      auth_func_spec:
+          comment: "initialize"
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "dev.ui"
+      auth_func_name: "ui.write"
+      auth_func_spec:
+          comment: "initialize"
+    # agent role
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "agent"
+      auth_func_name: "app.read"
+      auth_func_spec:
+          comment: "initialize"
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "agent"
+      auth_func_name: "app.status"
+      auth_func_spec:
+          comment: "initialize"
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "agent"
+      auth_func_name: "ui.read"
+      auth_func_spec:
+          comment: "initialize"
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "agent"
+      auth_func_name: "ui.status"
+      auth_func_spec:
+          comment: "initialize"
+    # user role
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "user"
+      auth_func_name: "app.read"
+      auth_func_spec:
+          comment: "initialize"
+    - namespace: "sys"
+      app_name: "appx"
+      role_name: "user"
+      auth_func_name: "ui.read"
+      auth_func_spec:
+          comment: "initialize"
+
+######################################################################
+# namespace
+namespace:
+    - namespace: "sys"
+      owner_realm: "main"
+      owner_name: "{{{MYSQL_CONF.appx_node_user}}}@LOCAL"
+      namespace_spec:
+          comment: "initialize"
+
+######################################################################
+# application
+app:
+    - namespace: "sys"
+      app_name: "appx"
+      app_ver: "internal"
+      app_spec:
+          comment: "initialize"
+
+######################################################################
+# app_runtime
+app_runtime:
+    - namespace: "sys"
+      app_name: "appx"
+      app_runtime: "base"
+      app_ver: "internal"
+      app_runtime_spec:
+          comment: "initialize"
+
+######################################################################
+# app_deployment
+app_deployment:
+    - namespace: "sys"
+      app_name: "appx"
+      app_deployment: "base"
+      app_runtime: "base"
+      app_ver: "internal"
+      app_rev: "default"
+      app_deployment_spec:
+          comment: "initialize"
+
+######################################################################
+# ui
+ui:
+    # console
+    - namespace: "sys"
+      ui_name: "console"
+      ui_ver: "internal"
+      ui_spec:
+          index:
+              entry: /Router
+              title: Design Your Own Apps with App-X
+          importMaps:
+              imports:
+                  - prefix: app-x/
+                    path: /app-x/
+              libs:
+                  - name: main
+                    path: /dist/lib/main.js
+                  - name: mui
+                    path: /dist/lib/mui.js
+                  - name: antd
+                    path: /dist/lib/antd.js
+                  - name: babel
+                    path: /dist/lib/babel.js
+          description: "App-X Console"
+          comment: "initialize"
+    # auth editor
+    - namespace: "sys"
+      ui_name: "auth"
+      ui_ver: "internal"
+      ui_spec:
+          index:
+              entry: /Router
+              title: Design Your Own Apps with App-X
+          importMaps:
+              imports:
+                  - prefix: app-x/
+                    path: /app-x/
+              libs:
+                  - name: main
+                    path: /dist/lib/main.js
+                  - name: mui
+                    path: /dist/lib/mui.js
+                  - name: antd
+                    path: /dist/lib/antd.js
+                  - name: babel
+                    path: /dist/lib/babel.js
+          description: "Auth Editor"
+          comment: "initialize"
+    # service builder
+    - namespace: "sys"
+      ui_name: "service"
+      ui_ver: "internal"
+      ui_spec:
+          index:
+              entry: /Router
+              title: Design Your Own Apps with App-X
+          importMaps:
+              imports:
+                  - prefix: app-x/
+                    path: /app-x/
+              libs:
+                  - name: main
+                    path: /dist/lib/main.js
+                  - name: mui
+                    path: /dist/lib/mui.js
+                  - name: antd
+                    path: /dist/lib/antd.js
+                  - name: babel
+                    path: /dist/lib/babel.js
+          description: "Service Builder"
+          comment: "initialize"
+    # ui builder
+    - namespace: "sys"
+      ui_name: "ui"
+      ui_ver: "internal"
+      ui_spec:
+          index:
+              entry: /Router
+              title: Design Your Own Apps with App-X
+          importMaps:
+              imports:
+                  - prefix: app-x/
+                    path: /app-x/
+              libs:
+                  - name: main
+                    path: /dist/lib/main.js
+                  - name: mui
+                    path: /dist/lib/mui.js
+                  - name: antd
+                    path: /dist/lib/antd.js
+                  - name: babel
+                    path: /dist/lib/babel.js
+          description: "UI Builder"
+          comment: "initialize"
+    # demo
+    - namespace: "sys"
+      ui_name: "demo"
+      ui_ver: "internal"
+      ui_spec:
+          index:
+              entry: /Router
+              title: Design Your Own Apps with App-X
+          importMaps:
+              imports:
+                  - prefix: app-x/
+                    path: /app-x/
+              libs:
+                  - name: main
+                    path: /dist/lib/main.js
+                  - name: mui
+                    path: /dist/lib/mui.js
+                  - name: antd
+                    path: /dist/lib/antd.js
+                  - name: babel
+                    path: /dist/lib/babel.js
+          description: "Demo"
+          comment: "initialize"
+
+######################################################################
+# ui_deployment
+ui_deployment:
+    # console
+    - namespace: "sys"
+      ui_name: "console"
+      ui_deployment: "base"
+      ui_ver: "internal"
+      ui_deployment_spec:
+          apiMaps:
+              - namespace: sys
+                app_name: auth
+                rootPath: /auth/
+              - namespace: sys
+                app_name: appx
+                rootPath: /api/
+                app_deployment: base
+          comment: "initialize"
+    # auth editor
+    - namespace: "sys"
+      ui_name: "auth"
+      ui_deployment: "base"
+      ui_ver: "internal"
+      ui_deployment_spec:
+          apiMaps:
+              - namespace: sys
+                app_name: auth
+                rootPath: /auth/
+              - namespace: sys
+                app_name: appx
+                rootPath: /api/
+                app_deployment: base
+          comment: "initialize"
+    # service builder
+    - namespace: "sys"
+      ui_name: "service"
+      ui_deployment: "base"
+      ui_ver: "internal"
+      ui_deployment_spec:
+          apiMaps:
+              - namespace: sys
+                app_name: auth
+                rootPath: /auth/
+              - namespace: sys
+                app_name: appx
+                rootPath: /api/
+                app_deployment: base
+          comment: "initialize"
+    # ui builder
+    - namespace: "sys"
+      ui_name: "ui"
+      ui_deployment: "base"
+      ui_ver: "internal"
+      ui_deployment_spec:
+          apiMaps:
+              - namespace: sys
+                app_name: auth
+                rootPath: /auth/
+              - namespace: sys
+                app_name: appx
+                rootPath: /api/
+                app_deployment: base
+          comment: "initialize"
+    # demo
+    - namespace: "sys"
+      ui_name: "demo"
+      ui_deployment: "base"
+      ui_ver: "internal"
+      ui_deployment_spec:
+          apiMaps:
+              - namespace: sys
+                app_name: auth
+                rootPath: /auth/
+              - namespace: sys
+                app_name: appx
+                rootPath: /api/
+                app_deployment: base
+          comment: "initialize"

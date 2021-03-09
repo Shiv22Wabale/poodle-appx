@@ -1,0 +1,26 @@
+"#ns{$sql_namespaces}":                                 # namespace
+    namespace: "@ns"
+    owner_scope: "$ns.owner_scope"
+    owner_name: "$ns.owner_name"
+    namespace_spec: "$ns.namespace_spec"
+
+    uis:
+        "#ui{$sql_ui_deployments_by_ui_ver[@ns]}":      # ui_name
+            "#ui{$ui}":                                 # ui_ver
+                "#ui{$ui}":                             # ui_deployment
+                    namespace: "@ns"
+                    ui_name: "@@@ui"
+                    ui_ver: "@@ui"
+                    ui_spec: "$ui.ui_spec"
+                    ui_deployment: "@ui"
+                    ui_deployment_spec: "$ui.ui_deployment_spec"
+
+    ui_deployments:
+        "#dp{$sql_ui_deployments[@ns]}":                # ui_name
+            "#dp{$dp}":                                 # ui_deployment
+                  namespace: "@ns"
+                  ui_name: "@@dp"
+                  ui_deployment: "@dp"
+                  ui_ver: "$dp.ui_ver"
+                  ui_spec: "$dp.ui_spec"
+                  ui_deployment_spec: "$dp.ui_deployment_spec"

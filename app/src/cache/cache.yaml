@@ -1,0 +1,147 @@
+##################################################
+realm:
+    params: null
+    sql_input: "realm.sql.yaml"
+    transform: "realm.transform.yaml"
+    reconcile:
+        min: 180
+        max: 360
+
+##################################################
+auth:
+    params: null
+    sql_input: "auth.sql.yaml"
+    transform: "auth.transform.yaml"
+    reconcile:
+        min: 180
+        max: 360
+
+##################################################
+namespace:
+    params: null
+    sql_input: "namespace.sql.yaml"
+    transform: "namespace.transform.yaml"
+    reconcile:
+        min: 180
+        max: 360
+    trigger:
+        "#ns{$namespace}":
+            - "$invoke":
+                  module: "../cache/cache"
+                  method: "load_cache_for"
+                  params:
+                      - '"app_runtime"'
+                      - namespace: "@ns"
+            - "$invoke":
+                  module: "../cache/cache"
+                  method: "load_cache_for"
+                  params:
+                      - '"app_deployment"'
+                      - namespace: "@ns"
+            - "$invoke":
+                  module: "../cache/cache"
+                  method: "load_cache_for"
+                  params:
+                      - '"ui_deployment"'
+                      - namespace: "@ns"
+
+##################################################
+app_runtime:
+    params:
+        - namespace
+    sql_input: "app_runtime.sql.yaml"
+    transform: "app_runtime.transform.yaml"
+    reconcile:
+        min: 180
+        max: 360
+
+##################################################
+app_deployment:
+    params:
+        - namespace
+    sql_input: "app_deployment.sql.yaml"
+    transform: "app_deployment.transform.yaml"
+    reconcile:
+        min: 180
+        max: 360
+    trigger:
+        "#ns{$app_deployment}":
+            app_deployments:
+                "#dp{$app_deployment[@ns]['app_deployments']}":   # app_name
+                    "#dp{$dp}":                                   # app_deployment
+                        "$invoke":
+                            module: "../cache/cache"
+                            method: "load_cache_for"
+                            params:
+                                - '"object"'
+                                - namespace: "@ns"
+                                  app_name: "@@dp"
+                                  app_deployment: "@dp"
+
+##################################################
+object:
+    params:
+        - namespace
+        - app_name
+        - app_runtime
+        - app_deployment
+    sql_input: "object.sql.yaml"
+    transform: "object.transform.yaml"
+    reconcile:
+        min: 180
+        max: 360
+
+##################################################
+ui_deployment:
+    params:
+        - namespace
+    sql_input: "ui_deployment.sql.yaml"
+    transform: "ui_deployment.transform.yaml"
+    reconcile:
+        min: 180
+        max: 360
+    trigger:
+        "#ns{$ui_deployment}":
+            ui_deployments:
+                "#dp{$ui_deployment[@ns]['ui_deployments']}":   # ui_name
+                    "#dp{$dp}":                                 # ui_deployment
+                        - "$invoke":
+                              module: "../cache/cache"
+                              method: "load_cache_for"
+                              params:
+                                  - '"ui_component"'
+                                  - namespace: "@ns"
+                                    ui_name: "@@dp"
+                                    ui_deployment: "@dp"
+                        - "$invoke":
+                              module: "../cache/cache"
+                              method: "load_cache_for"
+                              params:
+                                  - '"ui_route"'
+                                  - namespace: "@ns"
+                                    ui_name: "@@dp"
+                                    ui_deployment: "@dp"
+
+##################################################
+ui_component:
+    params:
+        - namespace
+        - ui_name
+        - ui_deployment
+    sql_input: "ui_component.sql.yaml"
+    transform: "ui_component.transform.yaml"
+    reconcile:
+        min: 180
+        max: 360
+
+##################################################
+ui_route:
+    params:
+        - namespace
+        - ui_name
+        - ui_deployment
+    sql_input: "ui_route.sql.yaml"
+    transform: "ui_route.transform.yaml"
+    reconcile:
+        min: 180
+        max: 360

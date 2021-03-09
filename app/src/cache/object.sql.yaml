@@ -1,0 +1,280 @@
+# namespace
+- query: "SELECT *
+            FROM namespace
+            WHERE
+                namespace = '{{params.namespace}}'
+                AND deleted = 0"
+  map_def:
+      - name: sql_namespaces
+        key:
+            - "$@.namespace"
+        value: "$@"
+
+# app
+- query: "SELECT *
+            FROM app
+            WHERE
+                namespace = '{{params.namespace}}'
+                AND app_name = '{{params.app_name}}'
+                AND deleted = 0"
+  map_def:
+      - name: sql_apps
+        key:
+            - "$@.namespace"
+            - "$@.app_name"
+            - "$@.app_ver"
+        value: "$@"
+
+# app_deployment
+- query: "SELECT *
+            FROM app_deployment
+            WHERE
+                namespace = '{{params.namespace}}'
+                AND app_name = '{{params.app_name}}'
+                AND app_deployment = '{{params.app_deployment}}'
+                AND deleted = 0"
+  map_def:
+      - name: sql_app_deployments
+        key:
+            - "$@.namespace"
+            - "$@.app_name"
+            - "$@.app_deployment"
+        value: "$@"
+
+      - name: sql_app_deployments_by_app_ver
+        key:
+            - "$@.namespace"
+            - "$@.app_name"
+            - "$@.app_ver"
+            - "$@.app_runtime"
+            - "$@.app_deployment"
+        value: "$@"
+
+# obj
+- query: "SELECT
+                obj.id,
+                obj.namespace,
+                obj.app_name,
+                obj.app_ver,
+                app_runtime.app_runtime,
+                app_deployment.app_deployment,
+                obj.obj_name,
+                obj.obj_type,
+                obj.obj_spec,
+                obj.create_time,
+                obj.update_time,
+                obj.deleted
+            FROM obj
+            JOIN app_runtime
+                ON obj.namespace = app_runtime.namespace
+                AND obj.app_name = app_runtime.app_name
+                AND obj.app_ver = app_runtime.app_ver
+            JOIN app_deployment
+                ON obj.namespace = app_deployment.namespace
+                AND obj.app_name = app_deployment.app_name
+                AND obj.app_ver = app_deployment.app_ver
+                AND app_runtime.app_runtime = app_deployment.app_runtime
+            WHERE
+                obj.namespace = '{{params.namespace}}'
+                AND obj.app_name = '{{params.app_name}}'
+                AND app_deployment.app_deployment = '{{params.app_deployment}}'
+                AND obj.deleted = 0
+                AND app_runtime.deleted = 0
+                AND app_deployment.deleted = 0"
+  map_def:
+      - name: sql_objs
+        key:
+            - "$@.namespace"
+            - "$@.app_name"
+            - "$@.app_deployment"
+            - "$@.obj_name"
+        value: "$@"
+
+# attrs
+- query: "SELECT
+                attr.id,
+                attr.namespace,
+                attr.app_name,
+                attr.app_ver,
+                app_runtime.app_runtime,
+                app_deployment.app_deployment,
+                attr.obj_name,
+                attr.attr_name,
+                attr.attr_spec,
+                attr.create_time,
+                attr.update_time,
+                attr.deleted
+            FROM attr
+            JOIN app_runtime
+                ON attr.namespace = app_runtime.namespace
+                AND attr.app_name = app_runtime.app_name
+                AND attr.app_ver = app_runtime.app_ver
+            JOIN app_deployment
+                ON attr.namespace = app_deployment.namespace
+                AND attr.app_name = app_deployment.app_name
+                AND attr.app_ver = app_deployment.app_ver
+                AND app_runtime.app_runtime = app_deployment.app_runtime
+            WHERE
+                attr.namespace = '{{params.namespace}}'
+                AND attr.app_name = '{{params.app_name}}'
+                AND app_deployment.app_deployment = '{{params.app_deployment}}'
+                AND attr.deleted = 0
+                AND app_runtime.deleted = 0
+                AND app_deployment.deleted = 0"
+  map_def:
+      - name: sql_attrs
+        key:
+            - "$@.namespace"
+            - "$@.app_name"
+            - "$@.app_deployment"
+            - "$@.obj_name"
+            - "$@.attr_name"
+        value: "$@"
+
+# relations
+- query: "SELECT
+                relation.id,
+                relation.namespace,
+                relation.app_name,
+                relation.app_ver,
+                relation.app_rev,
+                app_runtime.app_runtime,
+                app_deployment.app_deployment,
+                relation.obj_name,
+                relation.objn_name,
+                relation.relation_spec,
+                relation.create_time,
+                relation.update_time,
+                relation.deleted
+            FROM relation
+            JOIN app_runtime
+                ON relation.namespace = app_runtime.namespace
+                AND relation.app_name = app_runtime.app_name
+                AND relation.app_ver = app_runtime.app_ver
+            JOIN app_deployment
+                ON relation.namespace = app_deployment.namespace
+                AND relation.app_name = app_deployment.app_name
+                AND relation.app_ver = app_deployment.app_ver
+                AND relation.app_rev = app_deployment.app_rev
+                AND app_runtime.app_runtime = app_deployment.app_runtime
+            WHERE
+                relation.namespace = '{{params.namespace}}'
+                AND relation.app_name = '{{params.app_name}}'
+                AND app_deployment.app_deployment = '{{params.app_deployment}}'
+                AND relation.deleted = 0
+                AND app_runtime.deleted = 0
+                AND app_deployment.deleted = 0"
+  map_def:
+      - name: sql_relations_1ton
+        key:
+            - "$@.namespace"
+            - "$@.app_name"
+            - "$@.app_deployment"
+            - "$@.obj_name"
+            - "$@.objn_name"
+        value: "$@"
+
+      - name: sql_relations_nto1
+        key:
+            - "$@.namespace"
+            - "$@.app_name"
+            - "$@.app_deployment"
+            - "$@.objn_name"
+            - "$@.obj_name"
+        value: "$@"
+
+# apis
+- query: "SELECT
+                api.id,
+                api.namespace,
+                api.app_name,
+                api.app_ver,
+                api.app_rev,
+                app_runtime.app_runtime,
+                app_deployment.app_deployment,
+                api.obj_name,
+                api.api_method,
+                api.api_endpoint,
+                api.api_spec,
+                api.create_time,
+                api.update_time,
+                api.deleted
+            FROM api
+            JOIN app_runtime
+                ON api.namespace = app_runtime.namespace
+                AND api.app_name = app_runtime.app_name
+                AND api.app_ver = app_runtime.app_ver
+            JOIN app_deployment
+                ON api.namespace = app_deployment.namespace
+                AND api.app_name = app_deployment.app_name
+                AND api.app_ver = app_deployment.app_ver
+                AND api.app_rev = app_deployment.app_rev
+                AND app_runtime.app_runtime = app_deployment.app_runtime
+            WHERE
+                api.namespace = '{{params.namespace}}'
+                AND api.app_name = '{{params.app_name}}'
+                AND app_deployment.app_deployment = '{{params.app_deployment}}'
+                AND api.deleted = 0
+                AND app_runtime.deleted = 0
+                AND app_deployment.deleted = 0"
+  map_def:
+      - name: sql_apis_by_method
+        key:
+            - "$@.namespace"
+            - "$@.app_name"
+            - "$@.app_deployment"
+            - "$@.obj_name"
+            - "$@.api_method"
+            - "$@.api_endpoint"
+        value: "$@"
+
+      - name: sql_apis_by_endpoint
+        key:
+            - "$@.namespace"
+            - "$@.app_name"
+            - "$@.app_runtime"
+            - "$@.app_deployment"
+            - "$@.obj_name"
+            - "$@.api_endpoint"
+            - "$@.api_method"
+        value: "$@"
+
+# transforms
+- query: "SELECT
+                transform.id,
+                transform.namespace,
+                app_deployment.app_runtime,
+                transform.app_name,
+                transform.app_ver,
+                transform.obj_name,
+                transform.transform_name,
+                transform.transform_spec,
+                transform.create_time,
+                transform.update_time,
+                transform.deleted
+            FROM transform
+            JOIN app_runtime
+                ON transform.namespace = app_runtime.namespace
+                AND transform.app_name = app_runtime.app_name
+                AND transform.app_ver = app_runtime.app_ver
+            JOIN app_deployment
+                ON transform.namespace = app_deployment.namespace
+                AND transform.app_name = app_deployment.app_name
+                AND transform.app_ver = app_deployment.app_ver
+                AND app_runtime.app_runtime = app_deployment.app_runtime
+            WHERE
+                transform.namespace = '{{params.namespace}}'
+                AND transform.app_name = '{{params.app_name}}'
+                AND app_deployment.app_deployment = '{{params.app_deployment}}'
+                AND transform.deleted = 0
+                AND app_runtime.deleted = 0
+                AND app_deployment.deleted = 0"
+  map_def:
+      - name: sql_transforms
+        key:
+            - "$@.namespace"
+            - "$@.app_name"
+            - "$@.app_deployment"
+            - "$@.obj_name"
+            - "$@.transform_name"
+        value: "$@"

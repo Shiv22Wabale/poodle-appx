@@ -1,0 +1,2834 @@
+ui_component:
+  - namespace: sys
+    ui_name: ui
+    ui_ver: internal
+    ui_component_name: /Router
+    ui_component_type: react/component
+    ui_component_spec:
+      styles:
+        root:
+          color:
+            data: theme.palette.text.primary
+            _type: js/expression
+          height: 100%
+          backgroundColor:
+            data: theme.palette.background.paper
+            _type: js/expression
+        _type: mui/style
+        _order: 1
+      component:
+        name: react-redux.Provider
+        _type: react/element
+        props:
+          store:
+            name: app-x/redux/store
+            _type: js/import
+        _order: 2
+        children:
+          - name: app-x/theme/GlobalStyleProvider
+            _type: react/element
+            children:
+              - name: self/page/MobileNavProvider
+                _type: react/element
+                children:
+                  - name: app-x/builder/ui/NavProvider
+                    _type: react/element
+                    children:
+                      - name: app-x/route/RouterProvider
+                        _type: react/element
+                        children:
+                          - name: self/page/Console
+                            _type: react/element
+  - namespace: sys
+    ui_name: ui
+    ui_ver: internal
+    ui_component_name: /nav/uiNav
+    ui_component_type: react/component
+    ui_component_spec:
+      _test:
+        providers:
+          - name: react-redux.Provider
+            _type: react/element
+            props:
+              store:
+                name: app-x/redux/store
+                _type: js/import
+          - name: app-x/theme/GlobalStyleProvider
+            _type: react/element
+          - name: app-x/builder/ui/NavProvider
+            _type: react/element
+          - name: app-x/route/RouterProvider
+            _type: react/element
+      theme:
+        _type: mui/theme
+        _order: 6
+      router:
+        name: app-x/route/RouterProvider.Context
+        _type: route/context
+        _order: 1
+      styles:
+        root:
+          color:
+            data: theme.palette.text.primary
+            _type: js/expression
+          width: 100%
+          backgroundColor:
+            data: theme.palette.background.paper
+            _type: js/expression
+        _type: mui/style
+        _order: 7
+        divider:
+          margin:
+            data: theme.spacing(3, 0, 2)
+            _type: js/expression
+      effects:
+        body:
+          - _type: appx/api
+            method: get
+            app_name: appx
+            endpoint: /ui/ui_deployment
+            namespace: sys
+            resultHandler: |-
+              result => {
+                // console.log(result)
+                setUiDeployments(result)
+                if (router?.pathname.startsWith('/ui_component')) {
+                  const parts = router.pathname.split('/')
+                  const namespace = parts[2]
+                  const ui_name = parts[3]
+                  const ui_deployment = parts[4]
+                  const found = result.find(d =>
+                  `${d.namespace}/${d.ui_name}/${d.ui_deployment}`
+                   === `${namespace}/${ui_name}/${ui_deployment}`)
+                  if (found) {
+                    navContext.selectDeployment(found)
+                  } else {
+                    navContext.selectDeployment(null)
+                  }
+                }
+              }
+        _type: react/effect
+        _order: 5
+      component:
+        name: "@material-ui/core.Box"
+        _type: react/element
+        props:
+          className:
+            data: styles.root
+            _type: js/expression
+        _order: 8
+        children:
+          - name: "@material-ui/core.List"
+            _type: react/element
+            props:
+              className:
+                data: styles.root
+                _type: js/expression
+              component: nav
+              aria-labelledby: UI Builder
+            children:
+              - name: "@material-ui/core.ListSubheader"
+                _type: react/element
+                children:
+                  - UI Builder
+              - name: app-x/route/RouterProvider.Link
+                _type: react/element
+                props:
+                  to: /ui_apps
+                children:
+                  - name: "@material-ui/core.ListItem"
+                    _type: react/element
+                    props:
+                      dense: true
+                      button: true
+                      selected:
+                        data: router?.pathname.startsWith('/ui_apps')
+                        _type: js/expression
+                    children:
+                      - name: "@material-ui/core.ListItemIcon"
+                        _type: react/element
+                        children:
+                          - name: "@material-ui/icons.SettingsOutlined"
+                            _type: react/element
+                            props:
+                              fontSize: small
+                      - name: "@material-ui/core.ListItemText"
+                        _type: react/element
+                        props:
+                          primary: UI Apps
+              - name: app-x/route/RouterProvider.Link
+                _type: react/element
+                props:
+                  to: /ui_deployments
+                children:
+                  - name: "@material-ui/core.ListItem"
+                    _type: react/element
+                    props:
+                      dense: true
+                      button: true
+                      selected:
+                        data: router?.pathname.startsWith('/ui_deployments')
+                        _type: js/expression
+                    children:
+                      - name: "@material-ui/core.ListItemIcon"
+                        _type: react/element
+                        children:
+                          - name: "@material-ui/icons.DeviceHubOutlined"
+                            _type: react/element
+                            props:
+                              fontSize: small
+                      - name: "@material-ui/core.ListItemText"
+                        _type: react/element
+                        props:
+                          primary: UI Deployments
+                          variant: small
+              - name: app-x/route/RouterProvider.Link
+                _type: react/element
+                props:
+                  to: /packages
+                children:
+                  - name: "@material-ui/core.ListItem"
+                    _type: react/element
+                    props:
+                      dense: true
+                      button: true
+                      selected:
+                        data: router?.pathname.startsWith('/packages')
+                        _type: js/expression
+                    children:
+                      - name: "@material-ui/core.ListItemIcon"
+                        _type: react/element
+                        children:
+                          - name: "@material-ui/icons.ViewAgendaOutlined"
+                            _type: react/element
+                            props:
+                              fontSize: small
+                      - name: "@material-ui/core.ListItemText"
+                        _type: react/element
+                        props:
+                          primary: UI Packages
+              - name: "@material-ui/core.Divider"
+                _type: react/element
+                props:
+                  className:
+                    data: styles.divider
+                    _type: js/expression
+              - name: "@material-ui/core.ListItem"
+                _type: react/element
+                props:
+                  dense: true
+                children:
+                  - name: "@material-ui/core.FormControl"
+                    _type: react/element
+                    props:
+                      style:
+                        width: 100%
+                    children:
+                      - name: "@material-ui/core.FormHelperText"
+                        _type: react/element
+                        children:
+                          - Select Deployment
+                      - name: "@material-ui/core.Select"
+                        _type: react/element
+                        props:
+                          color: secondary
+                          value:
+                            data: >
+                              !!navContext.navDeployment?.namespace
+
+                              && !!navContext.navDeployment?.ui_name
+
+                              && !!navContext.navDeployment?.ui_deployment
+
+                              ? `${navContext.navDeployment?.namespace}/${navContext.navDeployment?.ui_name}/${navContext.navDeployment?.ui_deployment}`
+
+                              : ''
+                            _type: js/expression
+                          onChange:
+                            data: e => handleDeployment(e.target.value)
+                            _type: js/expression
+                        children:
+                          - name: "@material-ui/core.MenuItem"
+                            _type: react/element
+                            props:
+                              key: ""
+                              style:
+                                display: none
+                              value: ""
+                          - data:
+                              data: uiDeployments
+                              _type: js/expression
+                            _type: js/map
+                            result:
+                              name: "@material-ui/core.MenuItem"
+                              _type: react/element
+                              props:
+                                key:
+                                  data: "`${item.namespace}/${item.ui_name}/${item.ui_deployment}`"
+                                  _type: js/expression
+                                value:
+                                  data: "`${item.namespace}/${item.ui_name}/${item.ui_deployment}`"
+                                  _type: js/expression
+                              children:
+                                - name: "@material-ui/core.ListItemText"
+                                  _type: react/element
+                                  children:
+                                    - data: "`[ ${item.namespace} / ${item.ui_name} / ${item.ui_deployment} ]`"
+                                      _type: js/expression
+              - name: "@material-ui/core.Box"
+                _type: react/element
+                children:
+                  - name: app-x/builder/ui/component/ComponentProvider
+                    _type: react/element
+                    children:
+                      - name: app-x/builder/ui/component/ComponentTree
+                        _type: react/element
+                        props:
+                          ui_name: ui
+                          namespace: sys
+                          ui_deployment: base
+      navContext:
+        name: app-x/builder/ui/NavProvider.Context
+        _type: react/context
+        _order: 2
+      ...uiDeployments:
+        init: "[]"
+        name: uiDeployments
+        _type: react/state
+        _order: 3
+        setter: setUiDeployments
+      handleDeployment:
+        body:
+          - // console.log('handleDeployment', value)
+          - |-
+            const found = uiDeployments.find(d =>
+                `${d.namespace}/${d.ui_name}/${d.ui_deployment}`
+                === value)
+            if (found) {
+                navContext.selectDeployment(found)
+                const path = `/ui_component/${value}/`
+                router.navigate(path.replace(/\//g, '/'))
+            } else {
+                navContext.selectDeployment(null)
+            }
+        _type: js/function
+        _order: 4
+        params:
+          - value
+  - namespace: sys
+    ui_name: ui
+    ui_ver: internal
+    ui_component_name: /page/Console
+    ui_component_type: react/component
+    ui_component_spec:
+      _test:
+        providers:
+          - name: react-redux.Provider
+            _type: react/element
+            props:
+              store:
+                name: app-x/redux/store
+                _type: js/import
+          - name: app-x/theme/GlobalStyleProvider
+            _type: react/element
+          - name: self/page/MobileNavProvider
+            _type: react/element
+          - name: app-x/builder/ui/NavProvider
+            _type: react/element
+          - name: app-x/route/RouterProvider
+            _type: react/element
+      theme:
+        _type: mui/theme
+        _order: 2
+      uiNav:
+        name: self/nav/uiNav
+        _type: react/element
+        _order: 1
+      router:
+        name: app-x/route/RouterProvider.Context
+        _type: route/context
+        _order: 4
+      styles:
+        root:
+          color:
+            data: theme.palette.text.primary
+            _type: js/expression
+          height: 100%
+          backgroundColor:
+            data: theme.palette.background.paper
+            _type: js/expression
+        _type: mui/style
+        _order: 3
+        sideNav:
+          width: 280
+          height: 100%
+          backgroundColor:
+            data: theme.palette.background.paper
+            _type: js/expression
+      component:
+        name: antd.Layout
+        _type: react/element
+        style:
+          height: 100%
+        _order: 6
+        children:
+          - name: antd.Layout.Header
+            _type: react/element
+            children:
+              - name: self/page/Header
+                _type: react/element
+          - name: antd.Layout.Content
+            _type: react/element
+            style:
+              height: 100%
+            children:
+              - name: antd.Layout
+                _type: react/element
+                style:
+                  height: 100%
+                children:
+                  - name: "@material-ui/core.Hidden"
+                    _type: react/element
+                    props:
+                      lgUp: true
+                      className:
+                        data: styles.sideNav
+                        _type: js/expression
+                    children:
+                      - name: "@material-ui/core.Drawer"
+                        _type: react/element
+                        props:
+                          open:
+                            data: mobileNav.open
+                            _type: js/expression
+                          anchor: left
+                          classes:
+                            data: "{paper: styles.sideNav}"
+                            _type: js/expression
+                          onClose:
+                            data: e => mobileNav.setOpen(false)
+                            _type: js/expression
+                        children:
+                          - data: uiNav
+                            _type: js/expression
+                  - name: "@material-ui/core.Hidden"
+                    _type: react/element
+                    props:
+                      mdDown: true
+                    children:
+                      - name: antd.Layout.Sider
+                        _type: react/element
+                        props:
+                          width: 280
+                          className:
+                            data: styles.sideNav
+                            _type: js/expression
+                        style:
+                          border: 1
+                          borderTop: 0
+                          borderLeft: 0
+                          borderColor:
+                            data: theme.palette.divider
+                            _type: js/expression
+                          borderStyle: dotted
+                          borderBottom: "0"
+                        children:
+                          - data: uiNav
+                            _type: js/expression
+                  - name: antd.Layout.Content
+                    _type: react/element
+                    children:
+                      - name: react-router-dom.Routes
+                        _type: react/element
+                        children:
+                          - path: /
+                            _type: route/path
+                            element:
+                              name: self/page/Dashboard
+                              _type: react/element
+                          - path: /ui_deployments
+                            _type: route/path
+                            element:
+                              name: self/page/UIDeployments
+                              _type: react/element
+                          - path: /ui_apps
+                            _type: route/path
+                            element:
+                              name: self/page/UIApps
+                              _type: react/element
+                          - path: /packages
+                            _type: route/path
+                            element:
+                              name: self/page/UIPackages
+                              _type: react/element
+                          - path: /ui_component/*
+                            _type: route/path
+                            element:
+                              name: app-x/builder/ui/UI_Builder
+                              _type: react/element
+                              props:
+                                ui_name: ui
+                                namespace: sys
+                                ui_deployment: base
+                          - path: "*"
+                            _type: route/path
+                            element:
+                              name: app-x/page/error/NotFoundView
+                              _type: react/element
+      mobileNav:
+        name: self/page/MobileNavProvider.Context
+        _type: react/context
+        _order: 5
+  - namespace: sys
+    ui_name: ui
+    ui_ver: internal
+    ui_component_name: /page/Dashboard
+    ui_component_type: react/component
+    ui_component_spec:
+      _test:
+        providers:
+          - name: react-redux.Provider
+            _type: react/element
+            props:
+              store:
+                name: app-x/redux/store
+                _type: js/import
+          - name: app-x/theme/GlobalStyleProvider
+            _type: react/element
+          - name: app-x/route/RouterProvider
+            _type: react/element
+      theme:
+        _type: mui/theme
+        _order: 4
+      router:
+        name: app-x/route/RouterProvider.Context
+        _type: route/context
+        _order: 5
+      styles:
+        card:
+          width: 300
+          margin:
+            data: theme.spacing(2)
+            _type: js/expression
+          padding:
+            data: theme.spacing(0)
+            _type: js/expression
+        root:
+          color:
+            data: theme?.palette.text.primary
+            _type: js/expression
+          width: 100%
+          height: 100%
+          backgroundColor:
+            data: theme?.palette.background.paper
+            _type: js/expression
+        _type: mui/style
+        _order: 6
+      effects:
+        body:
+          - _type: appx/api
+            method: get
+            app_name: appx
+            endpoint: /ui/ui_app
+            namespace: sys
+            errorHandler: error => console.error(error)
+            resultHandler: result => setUiApps(result)
+          - _type: appx/api
+            method: get
+            app_name: appx
+            endpoint: /namespace/sys/ui_deployment
+            namespace: sys
+            errorHandler: error => console.error(error)
+            resultHandler: result => setUiDeployments(result)
+        _type: react/effect
+        _order: 3
+      ...uiApps:
+        init: "[]"
+        name: uiApps
+        _type: react/state
+        _order: 1
+        setter: setUiApps
+      component:
+        name: "@material-ui/core.Box"
+        _type: react/element
+        props:
+          className:
+            data: styles.root
+            _type: js/expression
+        _order: 7
+        children:
+          - name: "@material-ui/core.Box"
+            _type: react/element
+            props:
+              display: flex
+              className:
+                data: styles.root
+                _type: js/expression
+              alignItems: center
+              justifyContent: center
+            style:
+              backgroundColor:
+                data: theme.palette.background.default
+                _type: js/expression
+            children:
+              - name: "@material-ui/core.Card"
+                _type: react/element
+                props:
+                  className:
+                    data: styles.card
+                    _type: js/expression
+                children:
+                  - name: "@material-ui/core.CardActionArea"
+                    _type: react/element
+                    props:
+                      onClick:
+                        data: e => router.navigate('/ui_apps')
+                        _type: js/expression
+                    children:
+                      - name: "@material-ui/core.Box"
+                        _type: react/element
+                        style:
+                          padding:
+                            data: theme.spacing(2)
+                            _type: js/expression
+                        children:
+                          - name: "@material-ui/core.Typography"
+                            _type: react/element
+                            children:
+                              - UI Apps
+                          - name: "@material-ui/core.Typography"
+                            _type: react/element
+                            props:
+                              variant: h5
+                            children:
+                              - data: uiApps.length
+                                _type: js/expression
+                          - data:
+                              data: uiApps
+                              _type: js/expression
+                            _type: js/map
+                            result:
+                              name: "@material-ui/core.Typography"
+                              _type: react/element
+                              props:
+                                key:
+                                  data: "`${item.namespace}/${item.ui_name}`"
+                                  _type: js/expression
+                                variant: body2
+                              children:
+                                - data: "`${item.namespace} / ${item.ui_name}`"
+                                  _type: js/expression
+              - name: "@material-ui/core.Card"
+                _type: react/element
+                props:
+                  className:
+                    data: styles.card
+                    _type: js/expression
+                children:
+                  - name: "@material-ui/core.CardActionArea"
+                    _type: react/element
+                    props:
+                      onClick:
+                        data: e => router.navigate('/ui_deployments')
+                        _type: js/expression
+                    style:
+                      padding: theme.spacing(1)
+                    children:
+                      - name: "@material-ui/core.Box"
+                        _type: react/element
+                        style:
+                          padding:
+                            data: theme.spacing(2)
+                            _type: js/expression
+                        children:
+                          - name: "@material-ui/core.Typography"
+                            _type: react/element
+                            children:
+                              - UI Deployments
+                          - name: "@material-ui/core.Typography"
+                            _type: react/element
+                            props:
+                              variant: h5
+                            children:
+                              - data: uiDeployments.length
+                                _type: js/expression
+                          - data:
+                              data: uiDeployments
+                              _type: js/expression
+                            _type: js/map
+                            result:
+                              name: "@material-ui/core.Typography"
+                              _type: react/element
+                              props:
+                                key:
+                                  data: "`${item.namespace}/${item.ui_name}/${item.ui_deployment}`"
+                                  _type: js/expression
+                                variant: body2
+                              children:
+                                - data: "`${item.namespace} / ${item.ui_name} / ${item.ui_deployment}`"
+                                  _type: js/expression
+      ...uiDeployments:
+        init: "[]"
+        name: uiDeployments
+        _type: react/state
+        _order: 2
+        setter: setUiDeployments
+  - namespace: sys
+    ui_name: ui
+    ui_ver: internal
+    ui_component_name: /page/Header
+    ui_component_type: react/component
+    ui_component_spec:
+      _test:
+        providers:
+          - name: react-redux.Provider
+            _type: react/element
+            props:
+              store:
+                name: app-x/redux/store
+                _type: js/import
+          - name: self/page/MobileNavProvider
+            _type: react/element
+          - name: app-x/theme/GlobalStyleProvider
+            _type: react/element
+          - name: app-x/route/RouterProvider
+            _type: react/element
+      theme:
+        _type: mui/theme
+        _order: 1
+      router:
+        name: app-x/route/RouterProvider.Context
+        _type: route/context
+        _order: 3
+      styles:
+        _type: mui/style
+        _order: 2
+        avatar:
+          backgroundColor:
+            data: theme.palette.primary.light
+            _type: js/expression
+      component:
+        name: "@material-ui/core.AppBar"
+        _type: react/element
+        props:
+          elevation: 0
+        _order: 5
+        children:
+          - name: "@material-ui/core.Toolbar"
+            _type: react/element
+            children:
+              - name: "@material-ui/core.Fab"
+                _type: react/element
+                props:
+                  size: small
+                  color: primary
+                  onClick:
+                    data: e => router.hnavigate('sys', 'console', 'base', '/console')
+                    _type: js/expression
+                  className:
+                    data: styles.avatar
+                    _type: js/expression
+                style:
+                  boxShadow: none
+                children:
+                  - name: "@material-ui/icons.ViewQuiltRounded"
+                    _type: react/element
+              - name: "@material-ui/core.Fab"
+                _type: react/element
+                props:
+                  size: medium
+                  color: primary
+                  onClick:
+                    data: e => router.navigate('/')
+                    _type: js/expression
+                  variant: extended
+                style:
+                  margin:
+                    data: theme.spacing(1)
+                    _type: js/expression
+                  boxShadow: none
+                children:
+                  - UI Builder
+              - name: "@material-ui/core.Box"
+                _type: react/element
+                props:
+                  flexGrow: 1
+              - name: app-x/util/UserBadge
+                _type: react/element
+                props:
+                  auth:
+                    data: "{namespace:'sys',ui_name:'console',ui_deployment:'base'}"
+                    _type: js/expression
+                  realm: main
+                  authUrl: /login
+                  elevation: 0
+              - name: app-x/util/ThemeBadge
+                _type: react/element
+                style:
+                  margin:
+                    data: theme.spacing(1)
+                    _type: js/expression
+              - name: "@material-ui/core.Hidden"
+                _type: react/element
+                props:
+                  lgUp: true
+                children:
+                  - name: "@material-ui/core.Fab"
+                    _type: react/element
+                    props:
+                      size: small
+                      color: primary
+                      onClick:
+                        data: e => mobileNav.toggle()
+                        _type: js/expression
+                    style:
+                      boxShadow: none
+                    children:
+                      - name: "@material-ui/icons.Menu"
+                        _type: react/element
+      mobileNav:
+        name: self/page/MobileNavProvider.Context
+        _type: react/context
+        _order: 4
+  - namespace: sys
+    ui_name: ui
+    ui_ver: internal
+    ui_component_name: /page/MobileNavProvider
+    ui_component_type: react/provider
+    ui_component_spec:
+      toggle:
+        body:
+          - setOpen(!open)
+        _type: js/function
+        _order: 2
+      ...open:
+        init: "false"
+        name: open
+        _type: react/state
+        _order: 1
+        setter: setOpen
+      provider:
+        open:
+          data: open
+          _type: js/expression
+        _order: 3
+        toggle:
+          data: toggle
+          _type: js/expression
+        setOpen:
+          data: setOpen
+          _type: js/expression
+  - namespace: sys
+    ui_name: ui
+    ui_ver: internal
+    ui_component_name: /page/UIPackages
+    ui_component_type: react/component
+    ui_component_spec:
+      _test:
+        providers:
+          - name: react-redux.Provider
+            _type: react/element
+            props:
+              store:
+                name: app-x/redux/store
+                _type: js/import
+          - name: app-x/theme/GlobalStyleProvider
+            _type: react/element
+          - name: app-x/route/RouterProvider
+            _type: react/element
+      theme:
+        _type: mui/theme
+        _order: 4
+      router:
+        name: app-x/route/RouterProvider.Context
+        _type: route/context
+        _order: 7
+      styles:
+        root:
+          color:
+            data: theme?.palette.text.primary
+            _type: js/expression
+          width: 100%
+          height: 100%
+          backgroundColor:
+            data: theme?.palette.background.paper
+            _type: js/expression
+        _type: mui/style
+        _order: 5
+      effects:
+        body:
+          - _type: appx/api
+            method: get
+            app_name: appx
+            endpoint: /namespace
+            namespace: sys
+            errorHandler: error => console.error(error)
+            resultHandler: |-
+              result => {
+                // console.log('namespaces', result)
+                setNamespaces(result)
+              }
+        _type: react/effect
+        _order: 6
+        states:
+          - loadTrigger
+      component:
+        name: "@material-ui/core.Box"
+        _type: react/element
+        props:
+          className:
+            data: styles.root
+            _type: js/expression
+        _order: 8
+        children:
+          - data: namespaces
+            name: app-x/core/Table
+            _type: appx/table
+            columns:
+              - id: namespace
+                _type: appx/table/column
+                Header: Namespace
+                accessor: namespace
+              - id: bundles
+                _type: appx/table/column
+                Header: Bundles
+                accessor:
+                  body:
+                    - |-
+                      const bundle =
+                        row.namespace_spec.ui?.packages?.reduce(
+                          (accumulator, item) => {
+                            accumulator[item.bundle] = item
+                            return accumulator
+                          }, {}) || {}
+                      return Object.keys(bundle).join(', ')
+                  _type: js/function
+                  params:
+                    - row
+              - id: packages
+                _type: appx/table/column
+                Header: Packages
+                accessor:
+                  body:
+                    - >-
+                      const packages =
+                        row.namespace_spec.ui?.packages.map(item => item.package) || []
+                      return packages.join(', ')
+                  _type: js/function
+                  params:
+                    - row
+            rowPanel:
+              name: "@material-ui/core.Box"
+              _type: react/element
+              props:
+                width: 100%
+              style:
+                border: 1
+                borderTop: "0"
+                borderColor:
+                  data: theme.palette.divider
+                  _type: js/expression
+                borderStyle: solid
+              children:
+                - name: app-x/core/Form
+                  _type: appx/form
+                  onReset:
+                    body:
+                      - row.toggleRowExpanded()
+                    _type: js/function
+                  children:
+                    - func: renderDataPanel
+                      _type: js/call
+                      params:
+                        - Update
+                        - true
+                        - false
+                  onSubmit:
+                    body:
+                      - body:
+                          - |-
+                            // console.log(row)
+                            // row.toggleRowExpanded()
+                        _type: js/statement
+                      - data: |-
+                          {
+                            namespace_spec: data.namespace_spec
+                          }
+                        _type: appx/api
+                        method: patch
+                        app_name: appx
+                        endpoint: /namespace/:namespace
+                        namespace: sys
+                        resultHandler: result => setLoadTrigger(Date.now())
+                        endpointParams:
+                          namespace:
+                            data: data.namespace
+                            _type: js/expression
+                    _type: js/function
+                    params:
+                      - data
+                  defaultValue: row.original
+      ...currRow:
+        init: "{}"
+        name: currRow
+        _type: react/state
+        _order: 3
+        setter: setCurrRow
+      ...namespaces:
+        init: "[]"
+        name: namespaces
+        _type: react/state
+        _order: 1
+        setter: setNamespaces
+      ...loadTrigger:
+        init: "0"
+        name: loadTrigger
+        _type: react/state
+        _order: 2
+        setter: setLoadTrigger
+      renderDataPanel:
+        _type: js/function
+        _order: 9
+        params:
+          - action
+          - disableKeys
+          - disableNonKeys
+        return:
+          name: "@material-ui/core.Box"
+          _type: react/element
+          style:
+            padding:
+              data: theme.spacing(0, 4)
+              _type: js/expression
+          children:
+            - name: "@material-ui/core.Box"
+              _type: react/element
+              style:
+                padding:
+                  data: theme.spacing(2,0,0)
+                  _type: js/expression
+              children:
+                - id: namespace
+                  name: app-x/core/InputText
+                  _type: appx/input/text
+                  label: Namespace
+                  style:
+                    padding:
+                      data: theme.spacing(2,0)
+                      _type: js/expression
+                    maxWidth: 300
+                  required: true
+                  TextProps:
+                    size: small
+                    disabled:
+                      data: "!!disableKeys"
+                      _type: js/expression
+                - id: namespace_spec.ui.packages
+                  name: app-x/core/InputTabular
+                  _type: appx/input/tabular
+                  label: Package Depedencies
+                  style:
+                    padding:
+                      data: theme.spacing(2, 0)
+                      _type: js/expression
+                  columns:
+                    - id: bundle
+                      name: app-x/core/InputText
+                      _span: 6
+                      _type: appx/input/text
+                      label: Bundle
+                      required: true
+                      TextProps:
+                        size: small
+                        disabled:
+                          data: "!!disableNonKeys"
+                          _type: js/expression
+                    - id: package
+                      name: app-x/core/InputText
+                      _span: 10
+                      _type: appx/input/text
+                      label: Package Name
+                      required: true
+                      TextProps:
+                        size: small
+                        color: secondary
+                        disabled:
+                          data: "!!disableNonKeys"
+                          _type: js/expression
+                    - id: version
+                      name: app-x/core/InputText
+                      _span: 7
+                      _type: appx/input/text
+                      label: Version
+                      required: true
+                      TextProps:
+                        size: small
+                        color: secondary
+                        disabled:
+                          data: "!!disableNonKeys"
+                          _type: js/expression
+                  disabled: "!!disableNonKeys"
+                  actionSpan: 1
+                - id: namespace_spec.comment
+                  name: app-x/core/InputText
+                  _type: appx/input/text
+                  label: Comment
+                  style:
+                    padding:
+                      data: theme.spacing(2, 0)
+                      _type: js/expression
+                  TextProps:
+                    size: small
+                    color: secondary
+                    disabled:
+                      data: "!!disableNonKeys"
+                      _type: js/expression
+            - name: "@material-ui/core.Box"
+              _type: react/element
+              props:
+                display: flex
+              style:
+                padding:
+                  data: theme.spacing(2, 0)
+                  _type: js/expression
+              children:
+                - name: "@material-ui/core.Box"
+                  _type: react/element
+                  props:
+                    flexGrow: "1"
+                - name: app-x/core/InputReset
+                  _type: appx/input/reset
+                  children:
+                    - name: "@material-ui/core.Button"
+                      _type: react/element
+                      props:
+                        color: secondary
+                        variant: outlined
+                      style:
+                        margin:
+                          data: theme.spacing(0, 2)
+                          _type: js/expression
+                      children:
+                        - Cancel
+                - name: app-x/core/InputSubmit
+                  _type: appx/input/submit
+                  children:
+                    - name: "@material-ui/core.Button"
+                      _type: react/element
+                      props:
+                        color: secondary
+                        variant: contained
+                      style:
+                        boxShadow: none
+                      children:
+                        - data: action
+                          _type: js/expression
+  - namespace: sys
+    ui_name: ui
+    ui_ver: internal
+    ui_component_name: /page/UIApps
+    ui_component_type: react/component
+    ui_component_spec:
+      _test:
+        providers:
+          - name: react-redux.Provider
+            _type: react/element
+            props:
+              store:
+                name: app-x/redux/store
+                _type: js/import
+          - name: app-x/theme/GlobalStyleProvider
+            _type: react/element
+          - name: app-x/route/RouterProvider
+            _type: react/element
+      theme:
+        _type: mui/theme
+        _order: 7
+      router:
+        name: app-x/route/RouterProvider.Context
+        _type: route/context
+        _order: 10
+      styles:
+        root:
+          color:
+            data: theme?.palette.text.primary
+            _type: js/expression
+          width: 100%
+          height: 100%
+          backgroundColor:
+            data: theme?.palette.background.paper
+            _type: js/expression
+        _type: mui/style
+        _order: 8
+      effects:
+        body:
+          - _type: appx/api
+            method: get
+            app_name: appx
+            endpoint: /ui/ui_app
+            namespace: sys
+            errorHandler: error => console.error(error)
+            resultHandler: |-
+              result => {
+                // console.log('uiApps', result)
+                setUiApps(result)
+              }
+        _type: react/effect
+        _order: 9
+        states:
+          - loadTrigger
+      ...uiApps:
+        init: "[]"
+        name: uiApps
+        _type: react/state
+        _order: 1
+        setter: setUiApps
+      component:
+        name: "@material-ui/core.Box"
+        _type: react/element
+        props:
+          className:
+            data: styles.root
+            _type: js/expression
+        _order: 11
+        children:
+          - name: app-x/core/Dialog
+            open: addOpen
+            _type: appx/dialog
+            title: "`Add UI App`"
+            setOpen: setAddOpen
+            children:
+              - func: renderDataPanel
+                _type: js/call
+                params:
+                  - Add
+            onSubmit:
+              body:
+                - data: |-
+                    {
+                      ui_spec: data.ui_spec
+                    }
+                  _type: appx/api
+                  method: post
+                  app_name: appx
+                  endpoint: /namespace/:namespace/ui/:ui_name/:ui_ver
+                  namespace: sys
+                  resultHandler: result => setLoadTrigger(Date.now())
+                  endpointParams:
+                    ui_ver:
+                      data: data.ui_ver
+                      _type: js/expression
+                    ui_name:
+                      data: data.ui_name
+                      _type: js/expression
+                    namespace:
+                      data: data.namespace
+                      _type: js/expression
+              _type: js/function
+              params:
+                - data
+            DialogProps:
+              maxWidth: md
+              fullWidth: true
+          - name: app-x/core/Dialog
+            open: cloneOpen
+            _type: appx/dialog
+            title: "`Clone UI App`"
+            setOpen: setCloneOpen
+            children:
+              - func: renderDataPanel
+                _type: js/call
+                params:
+                  - Clone
+            onSubmit:
+              body:
+                - data: |-
+                    {
+                      ui_spec: data.ui_spec
+                    }
+                  _type: appx/api
+                  method: post
+                  app_name: appx
+                  endpoint: /namespace/:namespace/ui/:ui_name/:ui_ver
+                  namespace: sys
+                  resultHandler: result => setLoadTrigger(Date.now())
+                  endpointParams:
+                    ui_ver:
+                      data: data.ui_ver
+                      _type: js/expression
+                    ui_name:
+                      data: data.ui_name
+                      _type: js/expression
+                    namespace:
+                      data: data.namespace
+                      _type: js/expression
+              _type: js/function
+              params:
+                - data
+            DialogProps:
+              maxWidth: md
+              fullWidth: true
+            defaultValue: currRow.original
+          - name: app-x/core/Dialog
+            open: deleteOpen
+            _type: appx/dialog
+            title: "`Delete UI App`"
+            setOpen: setDeleteOpen
+            children:
+              - func: renderDataPanel
+                _type: js/call
+                params:
+                  - Delete
+                  - true
+                  - true
+            onSubmit:
+              body:
+                - _type: appx/api
+                  method: delete
+                  app_name: appx
+                  endpoint: /namespace/:namespace/ui/:ui_name/:ui_ver
+                  namespace: sys
+                  resultHandler: result => setLoadTrigger(Date.now())
+                  endpointParams:
+                    ui_ver:
+                      data: data.ui_ver
+                      _type: js/expression
+                    ui_name:
+                      data: data.ui_name
+                      _type: js/expression
+                    namespace:
+                      data: data.namespace
+                      _type: js/expression
+              _type: js/function
+              params:
+                - data
+            DialogProps:
+              maxWidth: md
+              fullWidth: true
+            defaultValue: currRow.original
+          - data: uiApps
+            name: app-x/core/Table
+            _type: appx/table
+            tools:
+              name: "@material-ui/core.IconButton"
+              _type: react/element
+              props:
+                onClick:
+                  data: e => setAddOpen(true)
+                  _type: js/expression
+              children:
+                - name: "@material-ui/icons.AddOutlined"
+                  _type: react/element
+            columns:
+              - id: namespace
+                _type: appx/table/column
+                Header: Namespace
+                accessor: namespace
+              - id: ui_name
+                _type: appx/table/column
+                Header: UI App
+                accessor: ui_name
+              - id: ui_ver
+                _type: appx/table/column
+                Header: Version
+                accessor: ui_ver
+              - id: entry
+                _type: appx/table/column
+                Header: Entry Point
+                accessor: ui_spec.index.entry
+              - id: title
+                _type: appx/table/column
+                Header: Title
+                accessor: ui_spec.index.title
+              - id: importMaps
+                _type: appx/table/column
+                Header: Import Maps
+                accessor:
+                  body:
+                    - >-
+                      const imports = (row.ui_spec.importMaps?.imports ||
+                      []).map(i => i.prefix)
+
+                      const libs = (row.ui_spec.importMaps?.libs || []).map(l => l.name)
+
+                      return [].concat(imports, libs).flat().join(', ')
+                  _type: js/function
+                  params:
+                    - row
+              - id: action
+                Cell:
+                  name: "@material-ui/core.Box"
+                  _type: react/element
+                  props:
+                    display: flex
+                    onClick:
+                      data: e => e.stopPropagation()
+                      _type: js/expression
+                    alignItems: center
+                    justifyContent: center
+                  children:
+                    - name: "@material-ui/core.Tooltip"
+                      _type: react/element
+                      props:
+                        title: Clone
+                      children:
+                        - name: "@material-ui/core.IconButton"
+                          _type: react/element
+                          props:
+                            size: small
+                            onClick:
+                              data: |-
+                                e => {
+                                  setCurrRow(row)
+                                  setCloneOpen(true)
+                                }
+                              _type: js/expression
+                          children:
+                            - name: "@material-ui/icons.AddToPhotosOutlined"
+                              _type: react/element
+                    - name: "@material-ui/core.Tooltip"
+                      _type: react/element
+                      props:
+                        title: Delete
+                      children:
+                        - name: "@material-ui/core.IconButton"
+                          _type: react/element
+                          props:
+                            size: small
+                            onClick:
+                              data: |-
+                                e => {
+                                  setCurrRow(row)
+                                  setDeleteOpen(true)
+                                }
+                              _type: js/expression
+                          children:
+                            - name: "@material-ui/icons.DeleteOutline"
+                              _type: react/element
+                _type: appx/table/column
+                Header: Action
+            rowPanel:
+              name: "@material-ui/core.Box"
+              _type: react/element
+              props:
+                width: 100%
+              style:
+                border: 1
+                borderTop: "0"
+                borderColor:
+                  data: theme.palette.divider
+                  _type: js/expression
+                borderStyle: solid
+              children:
+                - name: app-x/core/Form
+                  _type: appx/form
+                  onReset:
+                    body:
+                      - row.toggleRowExpanded()
+                    _type: js/function
+                  children:
+                    - func: renderDataPanel
+                      _type: js/call
+                      params:
+                        - Update
+                        - true
+                        - false
+                  onSubmit:
+                    body:
+                      - body:
+                          - |-
+                            // console.log(row)
+                            // row.toggleRowExpanded()
+                        _type: js/statement
+                      - data: |-
+                          {
+                            ui_spec: data.ui_spec
+                          }
+                        _type: appx/api
+                        method: put
+                        app_name: appx
+                        endpoint: /namespace/:namespace/ui/:ui_name/:ui_ver
+                        namespace: sys
+                        resultHandler: result => setLoadTrigger(Date.now())
+                        endpointParams:
+                          ui_ver:
+                            data: data.ui_ver
+                            _type: js/expression
+                          ui_name:
+                            data: data.ui_name
+                            _type: js/expression
+                          namespace:
+                            data: data.namespace
+                            _type: js/expression
+                    _type: js/function
+                    params:
+                      - data
+                  defaultValue: row.original
+      ...addOpen:
+        init: "false"
+        name: addOpen
+        _type: react/state
+        _order: 4
+        setter: setAddOpen
+      ...currRow:
+        init: "{}"
+        name: currRow
+        _type: react/state
+        _order: 3
+        setter: setCurrRow
+      ...cloneOpen:
+        init: "false"
+        name: cloneOpen
+        _type: react/state
+        _order: 5
+        setter: setCloneOpen
+      ...deleteOpen:
+        init: "false"
+        name: deleteOpen
+        _type: react/state
+        _order: 6
+        setter: setDeleteOpen
+      ...loadTrigger:
+        init: "0"
+        name: loadTrigger
+        _type: react/state
+        _order: 2
+        setter: setLoadTrigger
+      renderDataPanel:
+        _type: js/function
+        _order: 12
+        params:
+          - action
+          - disableKeys
+          - disableNonKeys
+        return:
+          name: "@material-ui/core.Box"
+          _type: react/element
+          style:
+            padding:
+              data: theme.spacing(0, 4)
+              _type: js/expression
+          children:
+            - name: "@material-ui/core.Box"
+              _type: react/element
+              style:
+                padding:
+                  data: theme.spacing(2,0)
+                  _type: js/expression
+              children:
+                - name: antd.Row
+                  _type: react/element
+                  children:
+                    - name: antd.Col
+                      _type: react/element
+                      props:
+                        span: 8
+                      children:
+                        - id: namespace
+                          name: app-x/core/InputText
+                          _type: appx/input/text
+                          label: Namespace
+                          style:
+                            padding:
+                              data: theme.spacing(1, 2, 0, 0)
+                              _type: js/expression
+                            maxWidth: 300
+                          required: true
+                          TextProps:
+                            size: small
+                            disabled:
+                              data: "!!disableKeys"
+                              _type: js/expression
+                    - name: antd.Col
+                      _type: react/element
+                      props:
+                        span: 8
+                      children:
+                        - id: ui_name
+                          name: app-x/core/InputText
+                          _type: appx/input/text
+                          label: UI App
+                          style:
+                            padding:
+                              data: theme.spacing(1, 2, 0, 0)
+                              _type: js/expression
+                            maxWidth: 300
+                          required: true
+                          TextProps:
+                            size: small
+                            disabled:
+                              data: "!!disableKeys"
+                              _type: js/expression
+                    - name: antd.Col
+                      _type: react/element
+                      props:
+                        span: 8
+                      children:
+                        - id: ui_ver
+                          name: app-x/core/InputText
+                          _type: appx/input/text
+                          label: UI Version
+                          style:
+                            padding:
+                              data: theme.spacing(1, 2, 0, 0)
+                              _type: js/expression
+                            maxWidth: 300
+                          required: true
+                          TextProps:
+                            size: small
+                            color: secondary
+                            margin: none
+                            disabled:
+                              data: "!!disableKeys"
+                              _type: js/expression
+            - name: "@material-ui/core.Box"
+              _type: react/element
+              style:
+                margin:
+                  data: theme.spacing(2,0)
+                  _type: js/expression
+              children:
+                - name: antd.Row
+                  _type: react/element
+                  style:
+                    padding:
+                      data: theme.spacing(2, 0)
+                      _type: js/expression
+                  children:
+                    - name: antd.Col
+                      _type: react/element
+                      props:
+                        span: 12
+                      style:
+                        padding:
+                          data: theme.spacing(0, 1)
+                          _type: js/expression
+                      children:
+                        - id: ui_spec.index.title
+                          name: app-x/core/InputText
+                          _type: appx/input/text
+                          label: Title
+                          required: true
+                          TextProps:
+                            size: small
+                            disabled:
+                              data: "!!disableNonKeys"
+                              _type: js/expression
+                    - name: antd.Col
+                      _type: react/element
+                      props:
+                        span: 12
+                      style:
+                        padding:
+                          data: theme.spacing(0, 1)
+                          _type: js/expression
+                      children:
+                        - id: ui_spec.index.entry
+                          name: app-x/core/InputText
+                          _type: appx/input/text
+                          label: Entry Point
+                          required: true
+                          TextProps:
+                            size: small
+                            disabled:
+                              data: "!!disableNonKeys"
+                              _type: js/expression
+                - name: antd.Row
+                  _type: react/element
+                  style:
+                    padding:
+                      data: theme.spacing(2, 0)
+                      _type: js/expression
+                  children:
+                    - name: antd.Col
+                      _type: react/element
+                      props:
+                        span: 12
+                      style:
+                        padding:
+                          data: theme.spacing(0, 1)
+                          _type: js/expression
+                      children:
+                        - id: ui_spec.importMaps.imports
+                          name: app-x/core/InputTabular
+                          _type: appx/input/tabular
+                          label: Imports
+                          style:
+                            padding:
+                              data: theme.spacing(2, 0)
+                              _type: js/expression
+                          columns:
+                            - id: prefix
+                              name: app-x/core/InputText
+                              _span: 10
+                              _type: appx/input/text
+                              label: Prefix
+                              required: true
+                              TextProps:
+                                size: small
+                                color: secondary
+                                disabled:
+                                  data: "!!disableNonKeys"
+                                  _type: js/expression
+                            - id: path
+                              name: app-x/core/InputText
+                              _span: 12
+                              _type: appx/input/text
+                              label: Path
+                              required: true
+                              TextProps:
+                                size: small
+                                color: secondary
+                                disabled:
+                                  data: "!!disableNonKeys"
+                                  _type: js/expression
+                          disabled: "!!disableNonKeys"
+                          actionSpan: 2
+                    - name: antd.Col
+                      _type: react/element
+                      props:
+                        span: 12
+                      style:
+                        padding:
+                          data: theme.spacing(0, 1)
+                          _type: js/expression
+                      children:
+                        - id: ui_spec.importMaps.libs
+                          name: app-x/core/InputTabular
+                          _type: appx/input/tabular
+                          label: Libs
+                          style:
+                            padding:
+                              data: theme.spacing(2, 0)
+                              _type: js/expression
+                          columns:
+                            - id: name
+                              name: app-x/core/InputText
+                              _span: 10
+                              _type: appx/input/text
+                              label: Name
+                              required: true
+                              TextProps:
+                                size: small
+                                color: secondary
+                                disabled:
+                                  data: "!!disableNonKeys"
+                                  _type: js/expression
+                            - id: path
+                              name: app-x/core/InputText
+                              _span: 12
+                              _type: appx/input/text
+                              label: Path
+                              required: true
+                              TextProps:
+                                size: small
+                                color: secondary
+                                disabled:
+                                  data: "!!disableNonKeys"
+                                  _type: js/expression
+                          disabled: "!!disableNonKeys"
+                          actionSpan: 2
+                - id: ui_spec.comment
+                  name: app-x/core/InputText
+                  _type: appx/input/text
+                  label: Comment
+                  style:
+                    padding:
+                      data: theme.spacing(2, 0)
+                      _type: js/expression
+                  TextProps:
+                    size: small
+                    color: secondary
+                    disabled:
+                      data: "!!disableNonKeys"
+                      _type: js/expression
+            - name: "@material-ui/core.Box"
+              _type: react/element
+              props:
+                display: flex
+              style:
+                padding:
+                  data: theme.spacing(2, 0)
+                  _type: js/expression
+              children:
+                - name: "@material-ui/core.Box"
+                  _type: react/element
+                  props:
+                    flexGrow: "1"
+                - name: app-x/core/InputReset
+                  _type: appx/input/reset
+                  children:
+                    - name: "@material-ui/core.Button"
+                      _type: react/element
+                      props:
+                        color: secondary
+                        variant: outlined
+                      style:
+                        margin:
+                          data: theme.spacing(0, 2)
+                          _type: js/expression
+                      children:
+                        - Cancel
+                - name: app-x/core/InputSubmit
+                  _type: appx/input/submit
+                  children:
+                    - name: "@material-ui/core.Button"
+                      _type: react/element
+                      props:
+                        color: secondary
+                        variant: contained
+                      style:
+                        boxShadow: none
+                      children:
+                        - data: action
+                          _type: js/expression
+  - namespace: sys
+    ui_name: ui
+    ui_ver: internal
+    ui_component_name: /page/UIDeployments
+    ui_component_type: react/component
+    ui_component_spec:
+      _test:
+        providers:
+          - name: react-redux.Provider
+            _type: react/element
+            props:
+              store:
+                name: app-x/redux/store
+                _type: js/import
+          - name: app-x/theme/GlobalStyleProvider
+            _type: react/element
+      theme:
+        _type: mui/theme
+        _order: 8
+      styles:
+        root:
+          color:
+            data: theme.palette.text.primary
+            _type: js/expression
+          width: 100%
+          height: 100%
+          backgroundColor:
+            data: theme.palette.background.paper
+            _type: js/expression
+        _type: mui/style
+        _order: 9
+      effects:
+        body:
+          - _type: appx/api
+            method: get
+            app_name: appx
+            endpoint: /namespace/sys/ui_deployment
+            namespace: sys
+            errorHandler: |-
+              error => {
+                console.error(error)
+                $I('antd.notification').error({
+                  message: 'Failed to load UI deployments',
+                  description: error.message || String(error),
+                  placement: 'bottomLeft'
+                })
+              }
+            resultHandler: |-
+              result => {
+                // console.log(result)
+                setDeployments(result)
+              }
+        _type: react/effect
+        _order: 7
+        states:
+          - loadTrigger
+      component:
+        name: "@material-ui/core.Box"
+        _type: react/element
+        props:
+          className:
+            data: styles.root
+            _type: js/expression
+        _order: 10
+        children:
+          - name: app-x/core/Dialog
+            open: addOpen
+            _type: appx/dialog
+            title: "`Add UI Deployment`"
+            setOpen: setAddOpen
+            children:
+              - func: renderDataPanel
+                _type: js/call
+                params:
+                  - Add
+            onSubmit:
+              body:
+                - data: |-
+                    {
+                      ui_ver: data.ui_ver,
+                      ui_deployment_spec: data.ui_deployment_spec
+                    }
+                  _type: appx/api
+                  method: post
+                  app_name: appx
+                  endpoint: /namespace/:namespace/ui_deployment/ui/:ui_name/deployment/:ui_deployment
+                  namespace: sys
+                  resultHandler: result => setLoadTrigger(Date.now())
+                  endpointParams:
+                    ui_name:
+                      data: data.ui_name
+                      _type: js/expression
+                    namespace:
+                      data: data.namespace
+                      _type: js/expression
+                    ui_deployment:
+                      data: data.ui_deployment
+                      _type: js/expression
+              _type: js/function
+              params:
+                - data
+            DialogProps:
+              maxWidth: md
+              fullWidth: true
+          - name: app-x/core/Dialog
+            open: cloneOpen
+            _type: appx/dialog
+            title: "`Clone UI Deployment`"
+            setOpen: setCloneOpen
+            children:
+              - func: renderDataPanel
+                _type: js/call
+                params:
+                  - Clone
+            onSubmit:
+              body:
+                - data: |-
+                    {
+                      ui_ver: data.ui_ver,
+                      ui_deployment_spec: data.ui_deployment_spec
+                    }
+                  _type: appx/api
+                  method: post
+                  app_name: appx
+                  endpoint: /namespace/:namespace/ui_deployment/ui/:ui_name/deployment/:ui_deployment
+                  namespace: sys
+                  resultHandler: result => setLoadTrigger(Date.now())
+                  endpointParams:
+                    ui_name:
+                      data: data.ui_name
+                      _type: js/expression
+                    namespace:
+                      data: data.namespace
+                      _type: js/expression
+                    ui_deployment:
+                      data: data.ui_deployment
+                      _type: js/expression
+              _type: js/function
+              params:
+                - data
+            DialogProps:
+              maxWidth: md
+              fullWidth: true
+            defaultValue: currRow.original
+          - name: app-x/core/Dialog
+            open: deleteOpen
+            _type: appx/dialog
+            title: "`Delete UI Deployment`"
+            setOpen: setDeleteOpen
+            children:
+              - func: renderDataPanel
+                _type: js/call
+                params:
+                  - Delete
+                  - true
+                  - true
+            onSubmit:
+              body:
+                - _type: appx/api
+                  method: delete
+                  app_name: appx
+                  endpoint: /namespace/:namespace/ui_deployment/ui/:ui_name/deployment/:ui_deployment
+                  namespace: sys
+                  resultHandler: result => setLoadTrigger(Date.now())
+                  endpointParams:
+                    ui_name:
+                      data: data.ui_name
+                      _type: js/expression
+                    namespace:
+                      data: data.namespace
+                      _type: js/expression
+                    ui_deployment:
+                      data: data.ui_deployment
+                      _type: js/expression
+              _type: js/function
+              params:
+                - data
+            DialogProps:
+              maxWidth: md
+              fullWidth: true
+            defaultValue: currRow.original
+          - data: deployments
+            name: app-x/core/Table
+            _type: appx/table
+            tools:
+              name: "@material-ui/core.IconButton"
+              _type: react/element
+              props:
+                onClick:
+                  data: e => setAddOpen(true)
+                  _type: js/expression
+              children:
+                - name: "@material-ui/icons.AddOutlined"
+                  _type: react/element
+            columns:
+              - id: namespace
+                _type: appx/table/column
+                Header: Namespace
+                accessor: namespace
+              - id: ui_name
+                _type: appx/table/column
+                Header: UI App
+                accessor: ui_name
+              - id: ui_ver
+                _type: appx/table/column
+                Header: Version
+                accessor: ui_ver
+              - id: ui_deployment
+                _type: appx/table/column
+                Header: Deployment
+                accessor: ui_deployment
+              - id: apiMaps
+                _type: appx/table/column
+                Header: API Maps
+                accessor:
+                  body:
+                    - |-
+                      const apiMaps =
+                        row.ui_deployment_spec.apiMaps || []
+                      return apiMaps.map(map => (
+                          `${map.namespace}/${map.app_name}`
+                      )).flat().join(', ')
+                  _type: js/function
+                  params:
+                    - row
+              - id: action
+                Cell:
+                  name: "@material-ui/core.Box"
+                  _type: react/element
+                  props:
+                    display: flex
+                    onClick:
+                      data: e => e.stopPropagation()
+                      _type: js/expression
+                    alignItems: center
+                    justifyContent: center
+                  children:
+                    - name: "@material-ui/core.Tooltip"
+                      _type: react/element
+                      props:
+                        title: Clone
+                      children:
+                        - name: "@material-ui/core.IconButton"
+                          _type: react/element
+                          props:
+                            size: small
+                            onClick:
+                              data: |-
+                                e => {
+                                  setCurrRow(row)
+                                  setCloneOpen(true)
+                                }
+                              _type: js/expression
+                          children:
+                            - name: "@material-ui/icons.AddToPhotosOutlined"
+                              _type: react/element
+                    - name: "@material-ui/core.Tooltip"
+                      _type: react/element
+                      props:
+                        title: Delete
+                      children:
+                        - name: "@material-ui/core.IconButton"
+                          _type: react/element
+                          props:
+                            size: small
+                            onClick:
+                              data: |-
+                                e => {
+                                  setCurrRow(row)
+                                  setDeleteOpen(true)
+                                }
+                              _type: js/expression
+                          children:
+                            - name: "@material-ui/icons.DeleteOutline"
+                              _type: react/element
+                _type: appx/table/column
+                Header: Action
+            rowPanel:
+              name: "@material-ui/core.Box"
+              _type: react/element
+              props:
+                width: 100%
+              style:
+                border: 1
+                borderTop: "0"
+                borderColor:
+                  data: theme.palette.divider
+                  _type: js/expression
+                borderStyle: solid
+              children:
+                - name: app-x/core/Form
+                  _type: appx/form
+                  onReset:
+                    body:
+                      - row.toggleRowExpanded()
+                    _type: js/function
+                  children:
+                    - func: renderDataPanel
+                      _type: js/call
+                      params:
+                        - Update
+                        - true
+                  onSubmit:
+                    body:
+                      - body:
+                          - |-
+                            // console.log(row)
+                            // row.toggleRowExpanded()
+                        _type: js/statement
+                      - data: |-
+                          {
+                            ui_ver: data.ui_ver,
+                            ui_deployment_spec: data.ui_deployment_spec
+                          }
+                        _type: appx/api
+                        method: put
+                        app_name: appx
+                        endpoint: /namespace/:namespace/ui_deployment/ui/:ui_name/deployment/:ui_deployment
+                        namespace: sys
+                        resultHandler: result => setLoadTrigger(Date.now())
+                        endpointParams:
+                          ui_name:
+                            data: data.ui_name
+                            _type: js/expression
+                          namespace:
+                            data: data.namespace
+                            _type: js/expression
+                          ui_deployment:
+                            data: data.ui_deployment
+                            _type: js/expression
+                    _type: js/function
+                    params:
+                      - data
+                  defaultValue: row.original
+      ...addOpen:
+        init: "false"
+        name: addOpen
+        _type: react/state
+        _order: 4
+        setter: setAddOpen
+      ...currRow:
+        init: "{}"
+        name: currRow
+        _type: react/state
+        _order: 3
+        setter: setCurrRow
+      ...cloneOpen:
+        init: "false"
+        name: cloneOpen
+        _type: react/state
+        _order: 5
+        setter: setCloneOpen
+      ...deleteOpen:
+        init: "false"
+        name: deleteOpen
+        _type: react/state
+        _order: 6
+        setter: setDeleteOpen
+      ...deployments:
+        init: "[]"
+        name: deployments
+        _type: react/state
+        _order: 1
+        setter: setDeployments
+      ...loadTrigger:
+        init: "0"
+        name: loadTrigger
+        _type: react/state
+        _order: 2
+        setter: setLoadTrigger
+      renderDataPanel:
+        _type: js/function
+        _order: 11
+        params:
+          - action
+          - disableKeys
+          - disableNonKeys
+        return:
+          name: "@material-ui/core.Box"
+          _type: react/element
+          style:
+            padding:
+              data: theme.spacing(0, 4)
+              _type: js/expression
+          children:
+            - name: "@material-ui/core.Box"
+              _type: react/element
+              style:
+                padding:
+                  data: theme.spacing(2, 0)
+                  _type: js/expression
+              children:
+                - name: antd.Row
+                  _type: react/element
+                  children:
+                    - name: antd.Col
+                      _type: react/element
+                      props:
+                        span: 12
+                      children:
+                        - id: namespace
+                          name: app-x/core/InputText
+                          _type: appx/input/text
+                          label: Namespace
+                          style:
+                            padding:
+                              data: theme.spacing(0, 2, 1, 0)
+                              _type: js/expression
+                            maxWidth: 300
+                          required: true
+                          TextProps:
+                            size: small
+                            disabled:
+                              data: "!!disableKeys"
+                              _type: js/expression
+                    - name: antd.Col
+                      _type: react/element
+                      props:
+                        span: 12
+                      children:
+                        - id: ui_name
+                          name: app-x/core/InputText
+                          _type: appx/input/text
+                          label: UI App
+                          style:
+                            padding:
+                              data: theme.spacing(0, 2, 1, 0)
+                              _type: js/expression
+                            maxWidth: 300
+                          required: true
+                          TextProps:
+                            size: small
+                            disabled:
+                              data: "!!disableKeys"
+                              _type: js/expression
+                - name: antd.Row
+                  _type: react/element
+                  children:
+                    - name: antd.Col
+                      _type: react/element
+                      props:
+                        span: 12
+                      children:
+                        - id: ui_deployment
+                          name: app-x/core/InputText
+                          _type: appx/input/text
+                          label: UI Deployment
+                          style:
+                            padding:
+                              data: theme.spacing(0, 2, 1, 0)
+                              _type: js/expression
+                            maxWidth: 300
+                          required: true
+                          TextProps:
+                            size: small
+                            color: secondary
+                            disabled:
+                              data: "!!disableKeys"
+                              _type: js/expression
+                    - name: antd.Col
+                      _type: react/element
+                      props:
+                        span: 12
+                      children:
+                        - id: ui_ver
+                          name: app-x/core/InputText
+                          _type: appx/input/text
+                          label: UI Version
+                          style:
+                            padding:
+                              data: theme.spacing(0, 2, 1, 0)
+                              _type: js/expression
+                            maxWidth: 300
+                          required: true
+                          TextProps:
+                            size: small
+                            color: secondary
+                            margin: none
+                            disabled:
+                              data: "!!disableNonKeys"
+                              _type: js/expression
+            - name: "@material-ui/core.Box"
+              _type: react/element
+              children:
+                - id: ui_deployment_spec.apiMaps
+                  name: app-x/core/InputTabular
+                  _type: appx/input/tabular
+                  label: API Maps
+                  style:
+                    padding:
+                      data: theme.spacing(2, 0)
+                      _type: js/expression
+                  columns:
+                    - id: namespace
+                      name: app-x/core/InputText
+                      _span: 5
+                      _type: appx/input/text
+                      label: Namespace
+                      required: true
+                      TextProps:
+                        size: small
+                        color: secondary
+                        disabled:
+                          data: "!!disableNonKeys"
+                          _type: js/expression
+                    - id: app_name
+                      name: app-x/core/InputText
+                      _span: 5
+                      _type: appx/input/text
+                      label: App Name
+                      required: true
+                      TextProps:
+                        size: small
+                        color: secondary
+                        disabled:
+                          data: "!!disableNonKeys"
+                          _type: js/expression
+                    - id: rootPath
+                      name: app-x/core/InputText
+                      _span: 8
+                      _type: appx/input/text
+                      label: Root Path
+                      required: true
+                      TextProps:
+                        size: small
+                        color: secondary
+                        disabled:
+                          data: "!!disableNonKeys"
+                          _type: js/expression
+                    - id: app_deployment
+                      name: app-x/core/InputText
+                      _span: 5
+                      _type: appx/input/text
+                      label: App Deployment
+                      TextProps:
+                        size: small
+                        color: secondary
+                        disabled:
+                          data: "!!disableNonKeys"
+                          _type: js/expression
+                  disabled: "!!disableNonKeys"
+                  actionSpan: 1
+                - id: ui_deployment_spec.comment
+                  name: app-x/core/InputText
+                  _type: appx/input/text
+                  label: Comment
+                  style:
+                    padding:
+                      data: theme.spacing(2, 0)
+                      _type: js/expression
+                  TextProps:
+                    size: small
+                    color: secondary
+                    disabled:
+                      data: "!!disableNonKeys"
+                      _type: js/expression
+            - name: "@material-ui/core.Box"
+              _type: react/element
+              props:
+                display: flex
+              style:
+                padding:
+                  data: theme.spacing(2, 0)
+                  _type: js/expression
+              children:
+                - name: "@material-ui/core.Box"
+                  _type: react/element
+                  props:
+                    flexGrow: "1"
+                - name: app-x/core/InputReset
+                  _type: appx/input/reset
+                  children:
+                    - name: "@material-ui/core.Button"
+                      _type: react/element
+                      props:
+                        color: secondary
+                        variant: outlined
+                      style:
+                        margin:
+                          data: theme.spacing(0, 2)
+                          _type: js/expression
+                      children:
+                        - Cancel
+                - name: app-x/core/InputSubmit
+                  _type: appx/input/submit
+                  children:
+                    - name: "@material-ui/core.Button"
+                      _type: react/element
+                      props:
+                        color: secondary
+                        variant: contained
+                      style:
+                        boxShadow: none
+                      children:
+                        - data: action
+                          _type: js/expression
+  - namespace: sys
+    ui_name: ui
+    ui_ver: internal
+    ui_component_name: /test/GridLayoutTest
+    ui_component_type: react/component
+    ui_component_spec:
+      f:
+        body:
+          - a+1
+        _type: js/function
+        _order: 1
+        params:
+          - a
+          - b
+      _test:
+        providers:
+          - name: react-redux.Provider
+            _type: react/element
+            props:
+              store:
+                name: app-x/redux/store
+                _type: js/import
+          - name: app-x/theme/GlobalStyleProvider
+            _type: react/element
+      theme:
+        _type: mui/theme
+        _order: 2
+      styles:
+        box:
+          borderColor:
+            data: theme.palette.divider
+            _type: js/expression
+          borderStyle: solid
+        root:
+          color:
+            data: theme.palette.text.primary
+            _type: js/expression
+          width: 100%
+          height: 100%
+          backgroundColor:
+            data: theme.palette.background.default
+            _type: js/expression
+        _type: mui/style
+        _order: 4
+        innerBox:
+          margin:
+            data: theme.spacing(2,0)
+            _type: js/expression
+          padding:
+            data: theme.spacing(2,2)
+            _type: js/expression
+          backgroundColor:
+            data: theme.palette.background.paper
+            _type: js/expression
+        formControl:
+          width: 100%
+          padding:
+            data: theme.spacing(2,0)
+            _type: js/expression
+      layouts:
+        lg:
+          - h: 15
+            i: a
+            w: 4
+            x: 0
+            y: 0
+          - h: 15
+            i: b
+            w: 6
+            x: 4
+            y: 0
+          - h: 4
+            i: c
+            w: 4
+            x: 4
+            y: 0
+        md:
+          - h: 15
+            i: a
+            w: 4
+            x: 0
+            y: 0
+          - h: 15
+            i: b
+            w: 6
+            x: 4
+            y: 0
+          - h: 4
+            i: c
+            w: 4
+            x: 4
+            y: 0
+        _order: 3
+      snippet:
+        body:
+          - _type: appx/api
+            method: get
+            app_name: appx
+            endpoint: /namespace
+            namespace: sys
+            errorHandler: |-
+              error => {
+                $I('antd.notification').error({
+                  message: 'API failed',
+                  description: error,
+                  placement: "bottomLeft"
+                })
+              }
+            resultHandler: result => console.log(result)
+          - body:
+              - // console.log(this)
+            _type: js/statement
+        _type: js/statement
+        _order: 5
+      component:
+        name: "@material-ui/core.Box"
+        _type: react/element
+        props:
+          className:
+            data: styles.root
+            _type: js/expression
+        _order: 6
+        children:
+          - name: react-grid-layout.Responsive
+            _type: react/element
+            props:
+              cols:
+                lg: 12
+                md: 12
+              width: 800
+              layouts:
+                data: layouts
+                _type: js/expression
+              className:
+                data: styles.root
+                _type: js/expression
+              rowHeight: 30
+              breakpoints:
+                lg: 1200
+                md: 0
+            children:
+              - name: "@material-ui/core.Box"
+                _type: react/element
+                props:
+                  key: a
+                  className:
+                    data: styles.box
+                    _type: js/expression
+                children:
+                  - name: "@material-ui/core.Box"
+                    _type: react/element
+                    props:
+                      onDrag:
+                        data: e => e.stopPropagation()
+                        _type: js/expression
+                      onClick:
+                        data: e => e.stopPropagation()
+                        _type: js/expression
+                      className:
+                        data: styles.innerBox
+                        _type: js/expression
+                      onMouseUp:
+                        data: e => e.stopPropagation()
+                        _type: js/expression
+                      onMouseDown:
+                        data: e => e.stopPropagation()
+                        _type: js/expression
+                    children:
+                      - name: app-x/core/Form
+                        _type: appx/form
+                        children:
+                          - id: text1
+                            name: app-x/core/InputText
+                            _type: appx/input/text
+                            label: A Label
+                            options:
+                              - a
+                              - abc
+                              - def
+                            BoxProps:
+                              className:
+                                data: styles.formControl
+                                _type: js/expression
+                            required: true
+                            TextProps:
+                              size: small
+                              color: secondary
+                          - id: select
+                            name: app-x/core/InputSelect
+                            _type: appx/input/select
+                            label: Select Label
+                            options:
+                              - abc
+                              - def
+                            BoxProps:
+                              className:
+                                data: styles.formControl
+                                _type: js/expression
+                            required: true
+                            TextProps:
+                              size: small
+                              color: secondary
+                            defaultValue: '"abc"'
+                          - id: text2
+                            name: app-x/core/InputText
+                            _type: appx/input/text
+                            label: "Text #2"
+                            options:
+                              - a
+                              - b
+                            BoxProps:
+                              className:
+                                data: styles.formControl
+                                _type: js/expression
+                            required: true
+                            TextProps:
+                              size: small
+                              color: secondary
+                              disabled: true
+                          - id: arr
+                            name: app-x/core/InputCollection
+                            _type: appx/input/collection
+                            render:
+                              name: "@material-ui/core.Box"
+                              _type: react/element
+                              children:
+                                - name: "@material-ui/core.FormHelperText"
+                                  _type: react/element
+                                  children:
+                                    - Array List
+                                - data: itemPanels
+                                  _type: js/expression
+                                - name: "@material-ui/core.IconButton"
+                                  _type: react/element
+                                  props:
+                                    size: small
+                                    onClick:
+                                      data: e => {fieldArrayProps.append( { texta:'', switchb:false } );
+                                        console.log(fieldArrayProps.fields)}
+                                      _type: js/expression
+                                  children:
+                                    - name: "@material-ui/icons.AddCircleOutline"
+                                      _type: react/element
+                            itemPanel:
+                              name: "@material-ui/core.Box"
+                              _type: react/element
+                              style:
+                                display: flex
+                              children:
+                                - name: "@material-ui/core.Box"
+                                  _type: react/element
+                                  style:
+                                    width: 100%
+                                  children:
+                                    - id: texta
+                                      name: app-x/core/InputText
+                                      _type: appx/input/text
+                                      label: Text A
+                                      rules:
+                                        data: []
+                                        _type: appx/input/rule
+                                      style:
+                                        padding:
+                                          data: theme.spacing(2, 0)
+                                          _type: js/expression
+                                      TextProps:
+                                        size: small
+                                    - id: switchb
+                                      name: app-x/core/InputSwitch
+                                      _type: appx/input/switch
+                                      label: Switch B
+                                      rules:
+                                        data: []
+                                        _type: appx/input/rule
+                                      style:
+                                        padding:
+                                          data: theme.spacing(2, 0)
+                                          _type: js/expression
+                                      SwitchProps:
+                                        size: small
+                                - name: "@material-ui/core.Box"
+                                  _type: react/element
+                                  props:
+                                    height: 100%
+                                    display: flex
+                                    alignitems: center
+                                    justifyContent: center
+                                  style:
+                                    padding:
+                                      data: theme.spacing(1)
+                                      _type: js/expression
+                                  children:
+                                    - name: "@material-ui/core.IconButton"
+                                      _type: react/element
+                                      props:
+                                        size: small
+                                        onClick:
+                                          data: e => fieldArrayProps.remove(index)
+                                          _type: js/expression
+                                      children:
+                                        - name: "@material-ui/icons.RemoveCircleOutline"
+                                          _type: react/element
+                          - name: app-x/core/InputSubmit
+                            _type: appx/input/submit
+                            children:
+                              - name: "@material-ui/core.Button"
+                                _type: react/element
+                                props:
+                                  color: secondary
+                                  variant: outlined
+                                style:
+                                  margin:
+                                    data: theme.spacing(2,0)
+                                    _type: js/expression
+                                children:
+                                  - Submit
+                        onSubmit:
+                          body:
+                            - console.log('form a', data)
+                          _type: js/function
+                          params:
+                            - data
+                        formProps:
+                          mode: onChange
+                          revalidateMode: onChange
+                  - a
+              - name: "@material-ui/core.Box"
+                _type: react/element
+                props:
+                  key: b
+                  className:
+                    data: styles.box
+                    _type: js/expression
+                children:
+                  - name: "@material-ui/core.Box"
+                    _type: react/element
+                    props:
+                      onDrag:
+                        data: e => e.stopPropagation()
+                        _type: js/expression
+                      onClick:
+                        data: e => e.stopPropagation()
+                        _type: js/expression
+                      className:
+                        data: styles.innerBox
+                        _type: js/expression
+                      onMouseUp:
+                        data: e => e.stopPropagation()
+                        _type: js/expression
+                      onMouseDown:
+                        data: e => e.stopPropagation()
+                        _type: js/expression
+                    children:
+                      - name: app-x/core/Form
+                        _type: appx/form
+                        children:
+                          - id: text
+                            name: app-x/core/InputTextArray
+                            _type: appx/input/textarray
+                            label: Text Label
+                            options:
+                              - abc
+                              - def
+                              - k
+                              - cat
+                            BoxProps:
+                              className:
+                                data: styles.formControl
+                                _type: js/expression
+                            callback: "(data) => {console.log(`callback data: ${data}`)}"
+                            required: true
+                            TextProps:
+                              size: small
+                              color: secondary
+                            defaultValue: '["a", "b"]'
+                          - id: switch
+                            name: app-x/core/InputSwitch
+                            _type: appx/input/switch
+                            label: Switch Label
+                            BoxProps:
+                              className:
+                                data: styles.formControl
+                                _type: js/expression
+                            required: true
+                            SwitchProps:
+                              size: small
+                              color: secondary
+                          - id: tabular
+                            name: app-x/core/InputTabular
+                            _type: appx/input/tabular
+                            label: Tabular
+                            columns:
+                              - id: text1
+                                name: app-x/core/InputText
+                                _span: 8
+                                _type: appx/input/text
+                                label: Text 1
+                                required: true
+                                TextProps:
+                                  size: small
+                              - id: switch2
+                                name: app-x/core/InputSwitch
+                                _span: 6
+                                _type: appx/input/switch
+                                label: Switch 2
+                                SwitchProps:
+                                  size: small
+                              - id: select3
+                                name: app-x/core/InputSelect
+                                _span: 8
+                                _type: appx/input/select
+                                label: Select 3
+                                options:
+                                  - a
+                                  - b
+                                TextProps:
+                                  size: small
+                            BoxProps:
+                              className:
+                                data: styles.formControl
+                                _type: js/expression
+                            actionSpan: 2
+                          - name: app-x/core/InputSubmit
+                            _type: appx/input/submit
+                            children:
+                              - name: "@material-ui/core.Button"
+                                _type: react/element
+                                props:
+                                  color: secondary
+                                  variant: outlined
+                                style:
+                                  margin:
+                                    data: theme.spacing(2,0)
+                                    _type: js/expression
+                                children:
+                                  - Submit
+                        onSubmit:
+                          body:
+                            - console.log('form b', data)
+                          _type: js/function
+                          params:
+                            - data
+                        formProps:
+                          mode: onChange
+                  - b
+              - name: "@material-ui/core.Box"
+                _type: react/element
+                props:
+                  key: c
+                  className:
+                    data: styles.box
+                    _type: js/expression
+                children:
+                  - c

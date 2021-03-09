@@ -1,0 +1,75 @@
+# namespace
+- query: "SELECT *
+            FROM namespace
+            WHERE
+                namespace = '{{params.namespace}}'
+                AND deleted = 0"
+  map_def:
+      - name: sql_namespaces
+        key:
+            - "$@.namespace"
+        value: "$@"
+
+# ui
+- query: "SELECT *
+            FROM ui
+            WHERE
+                namespace = '{{params.namespace}}'
+                AND ui_name = '{{params.ui_name}}'
+                AND deleted = 0"
+  map_def:
+      - name: sql_uis
+        key:
+            - "$@.namespace"
+            - "$@.ui_name"
+            - "$@.ui_ver"
+        value: "$@"
+
+# ui_deployment
+- query: "SELECT *
+            FROM ui_deployment
+            WHERE
+                namespace = '{{params.namespace}}'
+                AND ui_name = '{{params.ui_name}}'
+                AND ui_deployment = '{{params.ui_deployment}}'
+                AND deleted = 0"
+  map_def:
+      - name: sql_ui_deployments
+        key:
+            - "$@.namespace"
+            - "$@.ui_name"
+            - "$@.ui_deployment"
+        value: "$@"
+
+# ui_component
+- query: "SELECT
+                ui_component.id,
+                ui_component.namespace,
+                ui_component.ui_name,
+                ui_component.ui_ver,
+                ui_deployment.ui_deployment,
+                ui_component.ui_component_name,
+                ui_component.ui_component_type,
+                ui_component.ui_component_spec,
+                ui_component.create_time,
+                ui_component.update_time,
+                ui_component.deleted
+            FROM ui_component
+            JOIN ui_deployment
+                ON ui_component.namespace = ui_deployment.namespace
+                AND ui_component.ui_name = ui_deployment.ui_name
+                AND ui_component.ui_ver = ui_deployment.ui_ver
+            WHERE
+                ui_component.namespace = '{{params.namespace}}'
+                AND ui_component.ui_name = '{{params.ui_name}}'
+                AND ui_deployment.ui_deployment = '{{params.ui_deployment}}'
+                AND ui_component.deleted = 0
+                AND ui_deployment.deleted = 0"
+  map_def:
+      - name: sql_ui_components
+        key:
+            - "$@.namespace"
+            - "$@.ui_name"
+            - "$@.ui_deployment"
+            - "$@.ui_component_name"
+        value: "$@"
