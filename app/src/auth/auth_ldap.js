@@ -77,7 +77,8 @@ ldap:
 
 function findLdapUserWithPass(realm, protocol, username, password) {
 
-    protocol = { ...protocol }
+    protocol = { ...protocol };
+    let used_for_bind = false;
 
     // check mandatory config
     for (const protocol_attr of ['conf', 'base_dn', 'search', 'group_attr']) {
@@ -109,8 +110,13 @@ function findLdapUserWithPass(realm, protocol, username, password) {
             }
         }
         let ldap_conf = JSON.parse(fs.readFileSync(conf_file, 'utf8'))
-        let ldap_client = ldap_connect_sync(ldap_conf.host, ldap_conf.port, ldap_conf.ssl,
-                                            ldap_conf.bind_user, ldap_conf.bind_pass)
+        if( ldap_conf.bind_user === undefined ) {
+            ldap_conf.bind_user = username;
+            ldap_conf.bind_pass = password;
+            used_for_bind = true;
+        }
+    }
+        let ldap_client = ldap_connect_sync(ldap_conf.host, ldap_conf.port, ldap_conf.ssl, ldap_conf.bind_user, ldap_conf.bind_pass)
         ldap_conn[protocol.conf] = {
             ldap_conf: ldap_conf,
             ldap_client: ldap_client
@@ -136,7 +142,8 @@ function findLdapUserWithPass(realm, protocol, username, password) {
 
     // we have found the user, next, authenticate the user with password
     try {
-        ldap_connect_sync(ldap_conf.host, ldap_conf.port, ldap_conf.ssl, results[0].dn, password)
+        if( !used_for_bind )
+            ldap_connect_sync(ldap_conf.host, ldap_conf.port, ldap_conf.ssl, results[0].dn, password)
     } catch (err) {
         console.log(err)
         return {

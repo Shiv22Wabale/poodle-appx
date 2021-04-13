@@ -73,39 +73,22 @@ _realm_module:
               group_pattern: "^cn=([^,]+)(,(.+))?$"
               group_name_match: 1
           comment: "initialize auth module [appx.ldap_user]"
-    # google auth
+    # VISA ldap auth
     - realm: "main"
-      module_name: "20.appx.google"
-      module_pattern: "^(.+)$"
+      module_name: "10.visa.ldap"
+      module_priority: 10
+      module_pattern: "^(.+)\\@visa.com$"
       module_spec:
-          protocol: "google"
-          auth_name_match: 1
-          google:
-              some_key: "some_key"
-              some_other_key: "some_other_key"
-          comment: "initialize auth module [appx.google]"
-    # facebook auth
-    - realm: "main"
-      module_name: "21.appx.facebook"
-      module_pattern: "^(.+)$"
-      module_spec:
-          protocol: "facebook"
-          auth_name_match: 1
-          facebook:
-              some_key: "some_key"
-              some_other_key: "some_other_key"
-          comment: "initialize auth module [appx.facebook]"
-    # github auth
-    - realm: "main"
-      module_name: "22.appx.github"
-      module_pattern: "^(.+)$"
-      module_spec:
-          protocol: "github"
-          auth_name_match: 1
-          github:
-              some_key: "some_key"
-              some_other_key: "some_other_key"
-          comment: "initialize auth module [appx.facebook]"
+        protocol: "ldap"
+        auth_name_match: 0
+        ldap:
+          conf: ldap_appx.json
+          base_dn: "{{{LDAP_CONF.base_dn}}}"
+          search: "(&(objectclass=person)(userPrincipalName=${username}))"
+          group_attr: "memberOf"
+          group_pattern: "^cn=([^,]+)(,(.+))?$"
+          group_name_match: 1
+        comment: "initialize auth module [appx.ldap_user]"
 
 ######################################################################
 # _realm_app
