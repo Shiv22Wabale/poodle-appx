@@ -48,18 +48,13 @@ async function findUserWithPass(realm, username, password) {
         }
     }
 
-    let ldapAuthID = username;
-    if (!ldapAuthID.toLowerCase().endsWith('@visa.com')) {
-        ldapAuthID = `${username}@visa.com`;
-    }
-
     let sorted_module_name = Object.keys(realm_modules[realm]).sort()
     for (let i=0; i<sorted_module_name.length; i++) {
 
         let realm_module = realm_modules[realm][sorted_module_name[i]]
         // console.log(realm_module)
 
-        let matches = ldapAuthID.match(realm_module.module_pattern)
+        let matches = username.match(realm_module.module_pattern)
 
         if (matches) {
 

@@ -77,17 +77,18 @@ _realm_module:
     - realm: "main"
       module_name: "10.visa.ldap"
       module_priority: 10
-      module_pattern: "^(.+)\\@visa.com$"
+      module_pattern: "^(.+)$"
       module_spec:
         protocol: "ldap"
-        auth_name_match: 0
+        auth_name_match: 1
         ldap:
           conf: ldap_appx.json
           base_dn: "{{{LDAP_CONF.base_dn}}}"
-          search: "(&(objectclass=person)(userPrincipalName=${username}))"
+          search: "(&(objectclass=person)(userPrincipalName=${username}@visa.com))"
           group_attr: "memberOf"
           group_pattern: "^cn=([^,]+)(,(.+))?$"
           group_name_match: 1
+          blind_username: "${username}@visa.com"
         comment: "initialize auth module [appx.ldap_user]"
 
 ######################################################################

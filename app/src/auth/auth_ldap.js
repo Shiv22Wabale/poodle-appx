@@ -115,7 +115,12 @@ function findLdapUserWithPass(realm, protocol, username, password) {
             ldap_conf.bind_pass = password;
             used_for_bind = true;
         }
-    }
+
+        if( protocol.blind_username ) {
+            ldap_conf.bind_user = protocol.blind_username.replace(/\$\{username\}/, ldap_conf.bind_user)
+        }
+
+
         let ldap_client = ldap_connect_sync(ldap_conf.host, ldap_conf.port, ldap_conf.ssl, ldap_conf.bind_user, ldap_conf.bind_pass)
         ldap_conn[protocol.conf] = {
             ldap_conf: ldap_conf,
