@@ -15,6 +15,12 @@ init:
 init-env:
 	+$(MAKE) -C app init-env ${INIT_PATH}
 
+sonar-master:
+	sonar-scanner -Dsonar.projectName=parsec.poodle-appx -Dsonar.projectKey=parsec.poodle-appx -Dsonar.projectVersion=1.0 -Dsonar.sources=./app/src,./ui/spec,./ui/app-x
+
+sonar-pr:
+	sonar-scanner -Dsonar.projectName=parsec.poodle-appx -Dsonar.projectKey=parsec.poodle-appx -Dsonar.projectVersion=1.0 -Dsonar.sources=./app/src,./ui/spec,./ui/app-x -Dsonar.branch.name=$(GIT_BRANCH) -Dsonar.branch.target=master
+
 start-ui:
 	+$(MAKE) -C ui start
 
