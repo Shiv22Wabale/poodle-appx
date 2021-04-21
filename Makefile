@@ -12,6 +12,9 @@ build:
 init:
 	+$(MAKE) -C app init
 
+init-env:
+	+$(MAKE) -C app init-env ${INIT_PATH}
+
 start-ui:
 	+$(MAKE) -C ui start
 

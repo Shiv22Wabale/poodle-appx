@@ -1,0 +1,37 @@
+jobs:
+  name: poodle-appx
+  type: node
+  steps:
+    image: base/centos7-node12
+    useMakeTest: true
+    build:
+      build: make build
+    qualityScan: make sonar-master
+    securityScan:
+      filterPattern: 'app/**/*.js, ui/**/*.js'
+      excludeFolders: ''
+      groupId: fb48f27c-987a-44a3-ba21-a9f843b45287
+      credentialsId: dp_checkmarx
+      projectName: poodle-appx
+  publish:
+    steps:
+      artifactory:
+        uploadFiles: '[{"pattern":"rpmbuild/RPMS/**/*.rpm","target":"paas-portal-bin/poodle-appx/"}]'
+        credentialsId: at-upload
+  deployment:
+    tool: ansible-rpm
+    stack:
+      engine: host
+      credentialsId: remote-deployment
+    integration:
+      host: web
+      playbook: ansible/roles/deployment/main.yml
+      inventory: ansible/inventories/integration/hosts
+    lab:
+      host: web
+      playbook: ansible/roles/deployment/main.yml
+      inventory: ansible/inventories/lab/hosts
+    vmsn:
+      host: web
+      playbook: ansible/roles/deployment/main.yml
+      inventory: ansible/inventories/vmsn/hosts

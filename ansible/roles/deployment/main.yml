@@ -1,0 +1,45 @@
+---
+- hosts:
+    - "{{ deploy_host }}"
+  vars:
+    artifactory_path: https://artifactory.trusted.visa.com/paas-portal-bin/
+    rpm_root: /portal/rpmroot
+    rpm_db: /portal/rpmdb
+    package_name: poodle-appx
+    download_url: "{{ artifactory_path }}/{{ package_name }}/{{ package_name }}-{{ deploy_version}}-1.el7.x86_64.rpm"
+    tmp_file: "/tmp/{{ package_name }}-{{ deploy_version}}-1.el7.x86_64.rpm"
+    init_path: config/init.yaml
+  serial: "25%"
+  gather_facts: no
+  tasks:
+    - name: download package  "{{ download_url }}"
+      get_url:
+        url: "{{ download_url }}"
+        dest: "{{ tmp_file }}"
+        validate_certs: no
+        username: "{{ username }}"
+        password: "{{ password }}"
+      register: download_package
+    - debug: msg="{{ download_package }}"
+    - name: package install "{{ tmp_file }}"
+      command: "/usr/bin/rpm -ivhU --prefix {{ rpm_root }} --dbpath {{ rpm_db }} {{ tmp_file }}  --nomd5 --replacepkgs  --force"
+      args:
+        warn: no
+      register: package_install
+    - debug: msg="{{ package_install }}"
+    - name: delete package "{{ tmp_file }}"
+      file:
+        state: absent
+        path: "{{ tmp_file }}"
+    - name: start init
+      command: "make -C {{ rpm_root }}/{{ package_name }} init"
+      args:
+        warn: no
+      register: start_init
+    - debug: msg="{{ start_init }}"
+    - name: start app
+      command: "make -C {{ rpm_root }}/{{ package_name }} run"
+      args:
+        warn: no
+      register: start_app
+    - debug: msg="{{ start_app }}"

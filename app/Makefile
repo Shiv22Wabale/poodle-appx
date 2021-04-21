@@ -1,5 +1,5 @@
 run:
-	while true; do ./app.sh -c ./conf.d/mysql_appx.json -m ./conf.d/mount_appx.json; date; sleep 1; done
+	while true; do ./app.sh -c ./conf.d/mysql_appx.json -m ./conf.d/mount_appx.json -a ./conf.d/api_appx.json; date; sleep 1; done
 
 build:
 	rm -fR node_modules/
@@ -7,6 +7,10 @@ build:
 
 init:
 	./init.d/init.sh ./init.d/init.yaml
+	./schema.d/r001.p01/run.sh
+
+init-env:
+	./init.d/init.sh ${INIT_PATH}
 	./schema.d/r001.p01/run.sh
 
 test:

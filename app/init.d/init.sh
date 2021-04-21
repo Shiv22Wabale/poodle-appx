@@ -50,6 +50,15 @@ export INIT_YAML=/tmp/$$/init.yaml
 parse_yaml "${INIT_YAML}" > /tmp/$$/env.sh
 source /tmp/$$/env.sh
 
+echo "--------------------"
+API_APPX_FILE=${BASE_DIR}/conf.d/api_appx.json
+eval_template -t ${CURR_DIR}/api_appx.json -y1 ${INIT_YAML} > ${API_APPX_FILE}
+if [ $? -ne 0 ]; then
+    echo "ERROR: failed to generate ${API_APPX_FILE} ! --- [/tmp/$$/]"
+    exit 1
+fi
+chmod 644 ${API_APPX_FILE}
+
 # echo "------------------------------------------------------------"
 # cat $INIT_YAML
 # echo "------------------------------------------------------------"
@@ -129,11 +138,11 @@ while true
             if [ $try == $MAX_CHECKS ]; then
                 echo "ERROR: Connection to DB Failed. Number of retries [$try]. Max retries reached. Exiting"
                 exit 1
-            fi    
+            fi
             try=$[$try+1]
             sleep 30
         else
-            echo "INFO: Connection to DB Successful" 
+            echo "INFO: Connection to DB Successful"
             break
         fi
     done
