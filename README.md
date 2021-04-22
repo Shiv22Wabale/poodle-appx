@@ -22,7 +22,7 @@ rest API, and UI
     -- edit app/init.d/init.yaml
        update credentials and mysql connection info
 
-    $ make build    (this will build both server and client)
+    $ make install    (this will install both server and client)
 
     $ make init     (this will initialize the database)
 

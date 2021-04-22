@@ -1,13 +1,21 @@
 REPO=poodlehub
 NAME=poodle-appx
 VERSION=0.1
+TAG ?= $(eval TAG := $(shell git describe --tags --always --dirty)-$(shell git diff | sha256sum | cut -c -6))$(TAG)
+TAG_VERSION=$(subst -e3b0c4,,$(TAG))
+RPM_VERSION=$(subst -,.,$(TAG_VERSION))
+DEPLOY_PKG=poodle-aapx
+CURDIR := $(shell pwd)
 
 run:
 	+$(MAKE) -C app run
 
-build:
+install:
 	+$(MAKE) -C app build
 	+$(MAKE) -C ui build
+
+build:
+	rpmbuild -v -bb $(CURDIR)/rpmbuild/SPECS/poodle-appx.spec --define '_v_pkg_version ${RPM_VERSION}' --define  '_topdir $(CURDIR)/rpmbuild'
 
 init:
 	+$(MAKE) -C app init

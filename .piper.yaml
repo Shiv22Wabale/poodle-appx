@@ -5,6 +5,7 @@ jobs:
     image: base/centos7-node12
     useMakeTest: true
     build:
+      init: make install
       build: make build
     qualityScan: make sonar-master
     securityScan:

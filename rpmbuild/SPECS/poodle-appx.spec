@@ -23,14 +23,14 @@ conda-env
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install --directory $RPM_BUILD_ROOT/api
+install --directory $RPM_BUILD_ROOT/poodle-appx
 
 cp -R %{_topdir}/../app                     $RPM_BUILD_ROOT/poodle-appx/
 cp -R %{_topdir}/../ui                      $RPM_BUILD_ROOT/poodle-appx/
 cp -R %{_topdir}/../Makefile                $RPM_BUILD_ROOT/poodle-appx/
 
 %files
-%attr(0755, -, -) %{prefix}/api/Makefile
+%attr(0755, -, -) %{prefix}/poodle-appx/Makefile
 
 %dir
 %attr(0755, -, -) %{prefix}/poodle-appx/app
