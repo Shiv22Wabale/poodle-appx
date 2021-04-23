@@ -1,6 +1,0 @@
-{
-  "auth_root": "/auth",
-  "api_root": "/api",
-  "ui_root": "/ui"
-}
-

@@ -1,7 +1,0 @@
-{
-    "host": "visanpadoce.visa.com",
-    "port": "389",
-    "ssl": "false",
-    "base_dn": "dc=visa,dc=com"
-    }
-
