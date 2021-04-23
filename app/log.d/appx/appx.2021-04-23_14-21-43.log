@@ -1,0 +1,480 @@
+[2021-04-23 14:21:44] INFO: [DB POOL] connecting to localhost
+[2021-04-23 14:21:44] INFO: appx_spec [classes] [
+  'string',    'number',
+  'boolean',   'null',
+  'primitive', 'array',
+  'object',    'expression',
+  'statement', 'jsx',
+  'any'
+]
+[2021-04-23 14:21:44] INFO: appx_spec [types] [
+  'react/element',         'react/html',
+  'react/state',           'react/effect',
+  'react/context',         'appx/form',
+  'appx/dialog',           'appx/input/text',
+  'appx/input/textarray',  'appx/input/switch',
+  'appx/input/select',     'appx/input/tabular',
+  'appx/input/collection', 'appx/input/submit',
+  'appx/input/reset',      'appx/input/rule',
+  'appx/table',            'appx/table/column',
+  'js/null',               'js/string',
+  'js/number',             'js/boolean',
+  'js/object',             'js/array',
+  'js/import',             'js/expression',
+  'js/statement',          'js/function',
+  'js/call',               'js/condition',
+  'js/map',                'js/reduce',
+  'js/filter',             'mui/style',
+  'mui/theme',             'route/path',
+  'route/context',         'appx/api'
+]
+[2021-04-23 14:21:44] INFO: load_cache_for("realm", null) - success !
+[2021-04-23 14:21:44] INFO: load_cache_for("realm", null) - reconcile in 289 sec(s)
+[2021-04-23 14:21:44] INFO: load_cache_for("auth", null) - success !
+[2021-04-23 14:21:44] INFO: load_cache_for("auth", null) - reconcile in 283 sec(s)
+[2021-04-23 14:21:44] INFO: load_cache_for("namespace", null) - success !
+[2021-04-23 14:21:44] INFO: load_cache_for("namespace", null) - triggering ...
+[2021-04-23 14:21:44] INFO: load_cache_for("app_runtime", {"namespace":"sys"}) - success !
+[2021-04-23 14:21:44] INFO: load_cache_for("app_runtime", {"namespace":"sys"}) - reconcile in 277 sec(s)
+[2021-04-23 14:21:44] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["app_runtime",{"namespace":"sys"}] !
+[2021-04-23 14:21:44] INFO: load_cache_for("app_deployment", {"namespace":"sys"}) - success !
+[2021-04-23 14:21:44] INFO: load_cache_for("app_deployment", {"namespace":"sys"}) - triggering ...
+[2021-04-23 14:21:44] INFO: load_cache_for("object", {"namespace":"sys","app_name":"appx","app_deployment":"base"}) - success !
+[2021-04-23 14:21:44] INFO: load_cache_for("object", {"namespace":"sys","app_name":"appx","app_deployment":"base"}) - reconcile in 353 sec(s)
+[2021-04-23 14:21:44] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["object",{"namespace":"sys","app_name":"appx","app_deployment":"base"}] !
+[2021-04-23 14:21:44] INFO: load_cache_for("app_deployment", {"namespace":"sys"}) - reconcile in 326 sec(s)
+[2021-04-23 14:21:44] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["app_deployment",{"namespace":"sys"}] !
+[2021-04-23 14:21:44] INFO: load_cache_for("ui_deployment", {"namespace":"sys"}) - success !
+[2021-04-23 14:21:44] INFO: load_cache_for("ui_deployment", {"namespace":"sys"}) - triggering ...
+[2021-04-23 14:21:44] INFO: load_cache_for("ui_component", {"namespace":"sys","ui_name":"auth","ui_deployment":"base"}) - success !
+[2021-04-23 14:21:44] INFO: load_cache_for("ui_component", {"namespace":"sys","ui_name":"auth","ui_deployment":"base"}) - reconcile in 270 sec(s)
+[2021-04-23 14:21:44] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_component",{"namespace":"sys","ui_name":"auth","ui_deployment":"base"}] !
+[2021-04-23 14:21:44] INFO: load_cache_for("ui_route", {"namespace":"sys","ui_name":"auth","ui_deployment":"base"}) - success !
+[2021-04-23 14:21:44] INFO: load_cache_for("ui_route", {"namespace":"sys","ui_name":"auth","ui_deployment":"base"}) - reconcile in 352 sec(s)
+[2021-04-23 14:21:44] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_route",{"namespace":"sys","ui_name":"auth","ui_deployment":"base"}] !
+[2021-04-23 14:21:44] INFO: load_cache_for("ui_component", {"namespace":"sys","ui_name":"console","ui_deployment":"base"}) - success !
+[2021-04-23 14:21:44] INFO: load_cache_for("ui_component", {"namespace":"sys","ui_name":"console","ui_deployment":"base"}) - reconcile in 326 sec(s)
+[2021-04-23 14:21:44] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_component",{"namespace":"sys","ui_name":"console","ui_deployment":"base"}] !
+[2021-04-23 14:21:44] INFO: load_cache_for("ui_route", {"namespace":"sys","ui_name":"console","ui_deployment":"base"}) - success !
+[2021-04-23 14:21:44] INFO: load_cache_for("ui_route", {"namespace":"sys","ui_name":"console","ui_deployment":"base"}) - reconcile in 189 sec(s)
+[2021-04-23 14:21:44] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_route",{"namespace":"sys","ui_name":"console","ui_deployment":"base"}] !
+[2021-04-23 14:21:44] INFO: load_cache_for("ui_component", {"namespace":"sys","ui_name":"demo","ui_deployment":"base"}) - success !
+[2021-04-23 14:21:44] INFO: load_cache_for("ui_component", {"namespace":"sys","ui_name":"demo","ui_deployment":"base"}) - reconcile in 230 sec(s)
+[2021-04-23 14:21:44] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_component",{"namespace":"sys","ui_name":"demo","ui_deployment":"base"}] !
+[2021-04-23 14:21:44] INFO: load_cache_for("ui_route", {"namespace":"sys","ui_name":"demo","ui_deployment":"base"}) - success !
+[2021-04-23 14:21:44] INFO: load_cache_for("ui_route", {"namespace":"sys","ui_name":"demo","ui_deployment":"base"}) - reconcile in 320 sec(s)
+[2021-04-23 14:21:44] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_route",{"namespace":"sys","ui_name":"demo","ui_deployment":"base"}] !
+[2021-04-23 14:21:44] INFO: load_cache_for("ui_component", {"namespace":"sys","ui_name":"service","ui_deployment":"base"}) - success !
+[2021-04-23 14:21:44] INFO: load_cache_for("ui_component", {"namespace":"sys","ui_name":"service","ui_deployment":"base"}) - reconcile in 354 sec(s)
+[2021-04-23 14:21:44] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_component",{"namespace":"sys","ui_name":"service","ui_deployment":"base"}] !
+[2021-04-23 14:21:44] INFO: load_cache_for("ui_route", {"namespace":"sys","ui_name":"service","ui_deployment":"base"}) - success !
+[2021-04-23 14:21:44] INFO: load_cache_for("ui_route", {"namespace":"sys","ui_name":"service","ui_deployment":"base"}) - reconcile in 354 sec(s)
+[2021-04-23 14:21:44] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_route",{"namespace":"sys","ui_name":"service","ui_deployment":"base"}] !
+[2021-04-23 14:21:45] INFO: load_cache_for("ui_component", {"namespace":"sys","ui_name":"ui","ui_deployment":"base"}) - success !
+[2021-04-23 14:21:45] INFO: load_cache_for("ui_component", {"namespace":"sys","ui_name":"ui","ui_deployment":"base"}) - reconcile in 358 sec(s)
+[2021-04-23 14:21:45] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_component",{"namespace":"sys","ui_name":"ui","ui_deployment":"base"}] !
+[2021-04-23 14:21:45] INFO: load_cache_for("ui_route", {"namespace":"sys","ui_name":"ui","ui_deployment":"base"}) - success !
+[2021-04-23 14:21:45] INFO: load_cache_for("ui_route", {"namespace":"sys","ui_name":"ui","ui_deployment":"base"}) - reconcile in 301 sec(s)
+[2021-04-23 14:21:45] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_route",{"namespace":"sys","ui_name":"ui","ui_deployment":"base"}] !
+[2021-04-23 14:21:45] INFO: load_cache_for("ui_deployment", {"namespace":"sys"}) - reconcile in 331 sec(s)
+[2021-04-23 14:21:45] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_deployment",{"namespace":"sys"}] !
+[2021-04-23 14:21:45] INFO: load_cache_for("namespace", null) - reconcile in 183 sec(s)
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/core/Dialog]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/core/Form]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/core/InputCollection]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/core/InputProvider]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/core/InputReset]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/core/InputSelect]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/core/InputSwitch]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/core/InputSubmit]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/core/InputTabular]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/core/InputText]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/core/InputTextArray]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/core/Table]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/API]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Asterisk]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Bracket]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Calculator]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Code]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Context]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Css]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/CurlyBracket]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Database]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Branch]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Dialog]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Effect]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Facebook]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Filter]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Function]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/FunctionCall]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Form]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Html]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Google]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/InputCollection]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/InputRule]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/InputReset]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Import]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/InputSelect]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/InputSwitch]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/InputText]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/InputTabular]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/InputTextArray]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Pointer]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/InputSubmit]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Live]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Preview]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Provider]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Redo]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/React]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Reset]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Route]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/State]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Save]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Router]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Style]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Table]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/TableColumn]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Text]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Theme]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Undo]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/icon/Widget]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/route/RouterProvider]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/theme/dark]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/theme/GlobalStyleProvider]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/theme]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/theme/light]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/appx_api]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/appx_dialog]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/appx_form]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/appx_input_collection]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/appx_input_reset]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/appx_input_rule]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/appx_input_select]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/appx_input_submit]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/appx_input_switch]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/appx_input_tabular]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/appx_input_text]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/appx_input_textarray]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/appx_table]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/appx_table_column]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/classes]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/js_array]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/js_boolean]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/js_call]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/js_condition]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/js_expression]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/js_function]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/js_filter]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/js_import]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/js_map]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/js_null]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/js_number]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/js_reduce]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/js_statement]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/js_object]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/mui_style]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/js_string]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/react_context]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/react_element]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/react_effect]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/mui_theme]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/react_html]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/route_context]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/route_path]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/spec/react_state]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/util/Page]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/util/UserBadge]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/util/ThemeBadge]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/api]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/page/error/NotFoundView]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/page/landing/Unsplash_bg]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/page/landing/YouTube_fs]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/redux/store]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/redux/reducer]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/redux/reducer/roleReducer]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/redux/reducer/userReducer]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/component/AutoSuggest]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/component/ControlledEditor]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/component/InputField]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/component/InputProperties]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/component/TextFieldArray]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/component/InputFieldArray]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/component/InputFieldTabular]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/UI_Builder]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/NavProvider]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/component/ComponentDeleteDialog]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/component/ComponentProvider]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/component/ComponentAddDialog]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/component/ComponentTree]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/component/ComponentMenu]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/component/util]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/route/RouteAddDialog]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/route/RouteDeleteDialog]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/route/RouteProvider]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/route/RouteMenu]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/route/RouteTree]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/route/util]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/syntax/PreviewProvider]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/syntax/PreviewJson]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/syntax/PreviewSource]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/syntax/PreviewTabs]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/syntax/PreviewYaml]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/syntax/PropEditor]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/syntax/SyntaxAddDialog]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/syntax/SyntaxDeleteDialog]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/syntax/SyntaxMenu]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/syntax/SyntaxMoveDialog]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/syntax/SyntaxProvider]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/syntax/SyntaxTree]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/syntax/util_base]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/syntax/util_generate]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/syntax/util_parse]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/syntax/TestEditor]
+[2021-04-23 14:21:46] INFO: found app-x path [app-x/builder/ui/syntax/YamlEditor]
+[2021-04-23 14:21:46] INFO: loaded API routes for app_deployment [/sys/appx/base]
+[2021-04-23 14:21:46] INFO: loaded UI routes for ui_deployment [/sys/console/base]
+[2021-04-23 14:21:46] INFO: loaded UI routes for ui_deployment [/sys/auth/base]
+[2021-04-23 14:21:46] INFO: loaded UI routes for ui_deployment [/sys/service/base]
+[2021-04-23 14:21:46] INFO: loaded UI routes for ui_deployment [/sys/ui/base]
+[2021-04-23 14:21:46] INFO: loaded UI routes for ui_deployment [/sys/demo/base]
+[2021-04-23 14:21:46] INFO: appx rest api server listening at http://0.0.0.0:3080
+[2021-04-23 14:21:57] InvalidCredentialsError: 80090308: LdapErr: DSID-0C090453, comment: AcceptSecurityContext error, data 52e, v3839  Code: 0x31
+    at Function.parse (/Users/shiwabal/go/src/github.trusted.visa.com/parsec/poodle-appx/app/node_modules/ldapts/StatusCodeParser.js:54:24)
+    at Client.bind (/Users/shiwabal/go/src/github.trusted.visa.com/parsec/poodle-appx/app/node_modules/ldapts/Client.js:157:55)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at process.runNextTicks [as _tickCallback] (internal/process/task_queues.js:62:3)
+    at Function.module.exports.loopWhile (/Users/shiwabal/go/src/github.trusted.visa.com/parsec/poodle-appx/app/node_modules/deasync/index.js:70:11)
+    at /Users/shiwabal/go/src/github.trusted.visa.com/parsec/poodle-appx/app/node_modules/deasync/index.js:41:18
+    at findLdapUserWithPass (/Users/shiwabal/go/src/github.trusted.visa.com/parsec/poodle-appx/app/src/auth/auth_ldap.js:178:27)
+    at findUserWithPass (/Users/shiwabal/go/src/github.trusted.visa.com/parsec/poodle-appx/app/src/auth/util.js:138:36)
+    at loginUserWithPass (/Users/shiwabal/go/src/github.trusted.visa.com/parsec/poodle-appx/app/src/auth/util.js:183:28)
+    at _handle_login (/Users/shiwabal/go/src/github.trusted.visa.com/parsec/poodle-appx/app/src/auth/auth_router.js:43:15) {
+  code: 49
+}
+[2021-04-23 14:21:57] InvalidCredentialsError: 80090308: LdapErr: DSID-0C090453, comment: AcceptSecurityContext error, data 52e, v3839  Code: 0x31
+    at Function.parse (/Users/shiwabal/go/src/github.trusted.visa.com/parsec/poodle-appx/app/node_modules/ldapts/StatusCodeParser.js:54:24)
+    at Client.bind (/Users/shiwabal/go/src/github.trusted.visa.com/parsec/poodle-appx/app/node_modules/ldapts/Client.js:157:55)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at process.runNextTicks [as _tickCallback] (internal/process/task_queues.js:62:3)
+    at Function.module.exports.loopWhile (/Users/shiwabal/go/src/github.trusted.visa.com/parsec/poodle-appx/app/node_modules/deasync/index.js:70:11)
+    at /Users/shiwabal/go/src/github.trusted.visa.com/parsec/poodle-appx/app/node_modules/deasync/index.js:41:18
+    at findLdapUserWithPass (/Users/shiwabal/go/src/github.trusted.visa.com/parsec/poodle-appx/app/src/auth/auth_ldap.js:178:27)
+    at findUserWithPass (/Users/shiwabal/go/src/github.trusted.visa.com/parsec/poodle-appx/app/src/auth/util.js:138:36)
+    at loginUserWithPass (/Users/shiwabal/go/src/github.trusted.visa.com/parsec/poodle-appx/app/src/auth/util.js:183:28)
+    at _handle_login (/Users/shiwabal/go/src/github.trusted.visa.com/parsec/poodle-appx/app/src/auth/auth_router.js:43:15) {
+  code: 49
+}
+[2021-04-23 14:22:02] [
+  {
+    dn: 'CN=Wabale\\, Shivraj,OU=Users,OU=USA,DC=visa,DC=com',
+    memberOf: [
+      'CN=GDL - DL SPL Cobalt,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - PWD-RESET-ADM_UPM_UED_1,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - DL Data Cohort All,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - DL Data Cohort - Data Engineer,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-dp-infra-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - CxSASTComms,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - AppSecOpsCustomer_SAST,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=NA - DL US Employees Excludes Miami,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=ADL-Zandro_Luis_Gonzalez-FTE,OU=ADL All,OU=ADL Groups,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=ADL-Zandro_Luis_Gonzalez-AllStaff,OU=ADL All,OU=ADL Groups,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-drds-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - DL SPL eTime,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=NA - Denver VPN users,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-dp-vtos-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-dp-grasp-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-dpi-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - GDL - Class V,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=AzGrpLic-M365-Phone-Systems,OU=CorpCloud-Engineering,OU=CIT-Engineering,OU=US,OU=GROUPS,DC=visa,DC=com',
+      'CN=stash-vtrust-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-open-source-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - DL All Employees Excludes Managers,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-dpan-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - Bastion Breakglass Users No Badge Reader,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - PluralsightEOL1,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - DL Ask Now Fulfillment Users,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - Bastion Breakglass Users,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - DL SPL ESPP NA,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - SUDO Users,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - Firewall Class E Users,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - Bastion Users,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-difhub-sre-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-big-data-platform-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - DL ATCs Technology,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=github_dp,OU=Groups,OU=ISO,DC=visa,DC=com',
+      'CN=rtfact-paas-portal-dev-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - DL Zoom SPL,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=AzDyGrp-Technology-Rajat-Taneja-AllStaff,OU=CIT-Engineering,OU=US,OU=GROUPS,DC=visa,DC=com',
+      'CN=stash-watcher-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - DP PaaS Parsec Support,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=CA_VIZ_GEN_TBL_INT,OU=Dynamic,OU=Groups,OU=ISO,DC=visa,DC=com',
+      'CN=GDL - DL SPL Admin Right Users,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - DL AskNow Fulfilment Users,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-vau-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=Bastion_India_Users,OU=Groups,OU=ISO,DC=visa,DC=com',
+      'CN=stash-hygieia-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=dpdaashfrd,OU=Groups,OU=ISO,DC=visa,DC=com',
+      'CN=dpdaashtbl,OU=Groups,OU=ISO,DC=visa,DC=com',
+      'CN=stash-CDISI-DTRS-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-dpdaas-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-api-gateway-repo-adm,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-api-gateway-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=dpdaashint,OU=Groups,OU=ISO,DC=visa,DC=com',
+      'CN=dpdaashdev,OU=Groups,OU=ISO,DC=visa,DC=com',
+      'CN=GDL - DL Data Science,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - DL Mac Employees,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-probe-as-a-service-repo-adm,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-probe-as-a-service-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=code_v,OU=Groups,OU=ISO,DC=visa,DC=com',
+      'CN=stash-sphinx-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=0032557_DEVELOPER,OU=CV_App_Roles,OU=CloudViewPM,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=0032557_QA,OU=CV_App_Roles,OU=CloudViewPM,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=0032557_PRODUCT_OWNER,OU=CV_App_Roles,OU=CloudViewPM,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=hydra_db_e,OU=Groups,OU=ISO,DC=visa,DC=com',
+      'CN=stash-cookbooks-repo-adm,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-cookbooks-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-daas-dev-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-config-as-a-service-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=argus_db_e,OU=Groups,OU=ISO,DC=visa,DC=com',
+      'CN=dp-portal-dev-user,OU=Groups,OU=ISO,DC=visa,DC=com',
+      'CN=dp-portal-prod-admin,OU=Groups,OU=ISO,DC=visa,DC=com',
+      'CN=dp-portal-prod-user,OU=Groups,OU=ISO,DC=visa,DC=com',
+      'CN=dp-portal-dev-admin,OU=Groups,OU=ISO,DC=visa,DC=com',
+      'CN=stash-DP-DEBIT-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-starpay-app-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=rtfact-paas-portal-dev-ansible-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=rtfact-platform-ansible-snapshots-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=brkglassBastion_js_windows,OU=Groups,OU=ISO,DC=visa,DC=com',
+      'CN=GDL - DL SPL SUDO Employees,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - Parsec-Invent,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=NA - FCStepUp,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - DL Corporate Support Region Employees,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-starpay-api-test-repo-adm,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-starpay-api-test-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-DP-TOKEN-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - DL Global Tech Employees,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - Lockscreen USA FTEs,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=BST32557User,OU=Groups,OU=ISO,DC=visa,DC=com',
+      'CN=stash-KaaS-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-user-onboarding-repo-adm,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-user-onboarding-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-confluent-kafka-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-data-lake-controller-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=rtfact-paas-portal-dev-bin-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=jenkins-platform-portal_dev-proj-exe,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=jenkins-platform-portal_dev-proj-adm,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-platform-portal-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=mlp_note_p,OU=Groups,OU=ISO,DC=visa,DC=com',
+      'CN=GDL - DL ESPP USA-2,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=GDL - DL Data Platform PaaS - US,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+      'CN=stash-dpconsole-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+      ... 112 more items
+    ]
+  }
+]
+[2021-04-23 14:22:02] $1
+[2021-04-23 14:22:02] [
+  'CN=GDL - DL SPL Cobalt,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - PWD-RESET-ADM_UPM_UED_1,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - DL Data Cohort All,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - DL Data Cohort - Data Engineer,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-dp-infra-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - CxSASTComms,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - AppSecOpsCustomer_SAST,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=NA - DL US Employees Excludes Miami,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=ADL-Zandro_Luis_Gonzalez-FTE,OU=ADL All,OU=ADL Groups,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=ADL-Zandro_Luis_Gonzalez-AllStaff,OU=ADL All,OU=ADL Groups,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-drds-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - DL SPL eTime,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=NA - Denver VPN users,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-dp-vtos-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-dp-grasp-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-dpi-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - GDL - Class V,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=AzGrpLic-M365-Phone-Systems,OU=CorpCloud-Engineering,OU=CIT-Engineering,OU=US,OU=GROUPS,DC=visa,DC=com',
+  'CN=stash-vtrust-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-open-source-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - DL All Employees Excludes Managers,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-dpan-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - Bastion Breakglass Users No Badge Reader,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - PluralsightEOL1,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - DL Ask Now Fulfillment Users,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - Bastion Breakglass Users,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - DL SPL ESPP NA,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - SUDO Users,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - Firewall Class E Users,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - Bastion Users,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-difhub-sre-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-big-data-platform-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - DL ATCs Technology,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=github_dp,OU=Groups,OU=ISO,DC=visa,DC=com',
+  'CN=rtfact-paas-portal-dev-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - DL Zoom SPL,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=AzDyGrp-Technology-Rajat-Taneja-AllStaff,OU=CIT-Engineering,OU=US,OU=GROUPS,DC=visa,DC=com',
+  'CN=stash-watcher-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - DP PaaS Parsec Support,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=CA_VIZ_GEN_TBL_INT,OU=Dynamic,OU=Groups,OU=ISO,DC=visa,DC=com',
+  'CN=GDL - DL SPL Admin Right Users,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - DL AskNow Fulfilment Users,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-vau-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=Bastion_India_Users,OU=Groups,OU=ISO,DC=visa,DC=com',
+  'CN=stash-hygieia-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=dpdaashfrd,OU=Groups,OU=ISO,DC=visa,DC=com',
+  'CN=dpdaashtbl,OU=Groups,OU=ISO,DC=visa,DC=com',
+  'CN=stash-CDISI-DTRS-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-dpdaas-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-api-gateway-repo-adm,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-api-gateway-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=dpdaashint,OU=Groups,OU=ISO,DC=visa,DC=com',
+  'CN=dpdaashdev,OU=Groups,OU=ISO,DC=visa,DC=com',
+  'CN=GDL - DL Data Science,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - DL Mac Employees,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-probe-as-a-service-repo-adm,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-probe-as-a-service-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=code_v,OU=Groups,OU=ISO,DC=visa,DC=com',
+  'CN=stash-sphinx-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=0032557_DEVELOPER,OU=CV_App_Roles,OU=CloudViewPM,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=0032557_QA,OU=CV_App_Roles,OU=CloudViewPM,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=0032557_PRODUCT_OWNER,OU=CV_App_Roles,OU=CloudViewPM,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=hydra_db_e,OU=Groups,OU=ISO,DC=visa,DC=com',
+  'CN=stash-cookbooks-repo-adm,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-cookbooks-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-daas-dev-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-config-as-a-service-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=argus_db_e,OU=Groups,OU=ISO,DC=visa,DC=com',
+  'CN=dp-portal-dev-user,OU=Groups,OU=ISO,DC=visa,DC=com',
+  'CN=dp-portal-prod-admin,OU=Groups,OU=ISO,DC=visa,DC=com',
+  'CN=dp-portal-prod-user,OU=Groups,OU=ISO,DC=visa,DC=com',
+  'CN=dp-portal-dev-admin,OU=Groups,OU=ISO,DC=visa,DC=com',
+  'CN=stash-DP-DEBIT-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-starpay-app-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=rtfact-paas-portal-dev-ansible-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=rtfact-platform-ansible-snapshots-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=brkglassBastion_js_windows,OU=Groups,OU=ISO,DC=visa,DC=com',
+  'CN=GDL - DL SPL SUDO Employees,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - Parsec-Invent,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=NA - FCStepUp,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - DL Corporate Support Region Employees,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-starpay-api-test-repo-adm,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-starpay-api-test-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-DP-TOKEN-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - DL Global Tech Employees,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - Lockscreen USA FTEs,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=BST32557User,OU=Groups,OU=ISO,DC=visa,DC=com',
+  'CN=stash-KaaS-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-user-onboarding-repo-adm,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-user-onboarding-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-confluent-kafka-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-data-lake-controller-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=rtfact-paas-portal-dev-bin-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=jenkins-platform-portal_dev-proj-exe,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=jenkins-platform-portal_dev-proj-adm,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-platform-portal-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=mlp_note_p,OU=Groups,OU=ISO,DC=visa,DC=com',
+  'CN=GDL - DL ESPP USA-2,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=GDL - DL Data Platform PaaS - US,OU=HRIS-DL,OU=Financialsys,OU=Groups,OU=USA,DC=visa,DC=com',
+  'CN=stash-dpconsole-rw,OU=Ccrational,OU=Groups,OU=USA,DC=visa,DC=com',
+  ... 112 more items
+]
+[2021-04-23 14:22:02] INFO: user [shiwabal] authenticated successfully ! [10__visa__ldap]
