@@ -1,0 +1,13 @@
+{
+    "host": {"list":["localhost"]},
+    "port": "3338",
+    "user": "appx",
+    "pass": "P@@dle101",
+    "database": "appx",
+    "schema_prefix": "appx",
+    "schema_separator": ".",
+    "appx_node_user": "appx",
+    "appx_node_pass": "P@@dle101",
+    "appx_node_pool": "20"
+}
+

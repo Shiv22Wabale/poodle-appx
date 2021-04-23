@@ -1,0 +1,81 @@
+[2021-04-19 13:49:19] INFO: [DB POOL] connecting to localhost
+[2021-04-19 13:49:19] INFO: appx_spec [classes] [
+  'string',    'number',
+  'boolean',   'null',
+  'primitive', 'array',
+  'object',    'expression',
+  'statement', 'jsx',
+  'any'
+]
+[2021-04-19 13:49:19] INFO: appx_spec [types] [
+  'react/element',         'react/html',
+  'react/state',           'react/effect',
+  'react/context',         'appx/form',
+  'appx/dialog',           'appx/input/text',
+  'appx/input/textarray',  'appx/input/switch',
+  'appx/input/select',     'appx/input/tabular',
+  'appx/input/collection', 'appx/input/submit',
+  'appx/input/reset',      'appx/input/rule',
+  'appx/table',            'appx/table/column',
+  'js/null',               'js/string',
+  'js/number',             'js/boolean',
+  'js/object',             'js/array',
+  'js/import',             'js/expression',
+  'js/statement',          'js/function',
+  'js/call',               'js/condition',
+  'js/map',                'js/reduce',
+  'js/filter',             'mui/style',
+  'mui/theme',             'route/path',
+  'route/context',         'appx/api'
+]
+[2021-04-19 13:49:19] INFO: load_cache_for("realm", null) - success !
+[2021-04-19 13:49:19] INFO: load_cache_for("realm", null) - reconcile in 207 sec(s)
+[2021-04-19 13:49:19] INFO: load_cache_for("auth", null) - success !
+[2021-04-19 13:49:19] INFO: load_cache_for("auth", null) - reconcile in 299 sec(s)
+[2021-04-19 13:49:19] INFO: load_cache_for("namespace", null) - success !
+[2021-04-19 13:49:19] INFO: load_cache_for("namespace", null) - triggering ...
+[2021-04-19 13:49:19] INFO: load_cache_for("app_runtime", {"namespace":"sys"}) - success !
+[2021-04-19 13:49:19] INFO: load_cache_for("app_runtime", {"namespace":"sys"}) - reconcile in 279 sec(s)
+[2021-04-19 13:49:19] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["app_runtime",{"namespace":"sys"}] !
+[2021-04-19 13:49:19] INFO: load_cache_for("app_deployment", {"namespace":"sys"}) - success !
+[2021-04-19 13:49:19] INFO: load_cache_for("app_deployment", {"namespace":"sys"}) - triggering ...
+[2021-04-19 13:49:19] INFO: load_cache_for("object", {"namespace":"sys","app_name":"appx","app_deployment":"base"}) - success !
+[2021-04-19 13:49:19] INFO: load_cache_for("object", {"namespace":"sys","app_name":"appx","app_deployment":"base"}) - reconcile in 184 sec(s)
+[2021-04-19 13:49:19] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["object",{"namespace":"sys","app_name":"appx","app_deployment":"base"}] !
+[2021-04-19 13:49:19] INFO: load_cache_for("app_deployment", {"namespace":"sys"}) - reconcile in 196 sec(s)
+[2021-04-19 13:49:19] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["app_deployment",{"namespace":"sys"}] !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_deployment", {"namespace":"sys"}) - success !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_deployment", {"namespace":"sys"}) - triggering ...
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_component", {"namespace":"sys","ui_name":"auth","ui_deployment":"base"}) - success !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_component", {"namespace":"sys","ui_name":"auth","ui_deployment":"base"}) - reconcile in 347 sec(s)
+[2021-04-19 13:49:19] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_component",{"namespace":"sys","ui_name":"auth","ui_deployment":"base"}] !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_route", {"namespace":"sys","ui_name":"auth","ui_deployment":"base"}) - success !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_route", {"namespace":"sys","ui_name":"auth","ui_deployment":"base"}) - reconcile in 195 sec(s)
+[2021-04-19 13:49:19] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_route",{"namespace":"sys","ui_name":"auth","ui_deployment":"base"}] !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_component", {"namespace":"sys","ui_name":"console","ui_deployment":"base"}) - success !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_component", {"namespace":"sys","ui_name":"console","ui_deployment":"base"}) - reconcile in 329 sec(s)
+[2021-04-19 13:49:19] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_component",{"namespace":"sys","ui_name":"console","ui_deployment":"base"}] !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_route", {"namespace":"sys","ui_name":"console","ui_deployment":"base"}) - success !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_route", {"namespace":"sys","ui_name":"console","ui_deployment":"base"}) - reconcile in 186 sec(s)
+[2021-04-19 13:49:19] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_route",{"namespace":"sys","ui_name":"console","ui_deployment":"base"}] !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_component", {"namespace":"sys","ui_name":"demo","ui_deployment":"base"}) - success !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_component", {"namespace":"sys","ui_name":"demo","ui_deployment":"base"}) - reconcile in 211 sec(s)
+[2021-04-19 13:49:19] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_component",{"namespace":"sys","ui_name":"demo","ui_deployment":"base"}] !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_route", {"namespace":"sys","ui_name":"demo","ui_deployment":"base"}) - success !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_route", {"namespace":"sys","ui_name":"demo","ui_deployment":"base"}) - reconcile in 254 sec(s)
+[2021-04-19 13:49:19] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_route",{"namespace":"sys","ui_name":"demo","ui_deployment":"base"}] !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_component", {"namespace":"sys","ui_name":"service","ui_deployment":"base"}) - success !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_component", {"namespace":"sys","ui_name":"service","ui_deployment":"base"}) - reconcile in 202 sec(s)
+[2021-04-19 13:49:19] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_component",{"namespace":"sys","ui_name":"service","ui_deployment":"base"}] !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_route", {"namespace":"sys","ui_name":"service","ui_deployment":"base"}) - success !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_route", {"namespace":"sys","ui_name":"service","ui_deployment":"base"}) - reconcile in 255 sec(s)
+[2021-04-19 13:49:19] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_route",{"namespace":"sys","ui_name":"service","ui_deployment":"base"}] !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_component", {"namespace":"sys","ui_name":"ui","ui_deployment":"base"}) - success !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_component", {"namespace":"sys","ui_name":"ui","ui_deployment":"base"}) - reconcile in 261 sec(s)
+[2021-04-19 13:49:19] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_component",{"namespace":"sys","ui_name":"ui","ui_deployment":"base"}] !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_route", {"namespace":"sys","ui_name":"ui","ui_deployment":"base"}) - success !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_route", {"namespace":"sys","ui_name":"ui","ui_deployment":"base"}) - reconcile in 343 sec(s)
+[2021-04-19 13:49:19] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_route",{"namespace":"sys","ui_name":"ui","ui_deployment":"base"}] !
+[2021-04-19 13:49:19] INFO: load_cache_for("ui_deployment", {"namespace":"sys"}) - reconcile in 230 sec(s)
+[2021-04-19 13:49:19] INFO: invoke successful ! [../cache/cache/load_cache_for] with ["ui_deployment",{"namespace":"sys"}] !
+[2021-04-19 13:49:19] INFO: load_cache_for("namespace", null) - reconcile in 214 sec(s)

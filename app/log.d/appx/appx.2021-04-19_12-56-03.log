@@ -1,0 +1,45 @@
+[2021-04-19 12:56:04] INFO: [DB POOL] connecting to localhost
+[2021-04-19 12:56:05] INFO: appx_spec [classes] [
+  'string',    'number',
+  'boolean',   'null',
+  'primitive', 'array',
+  'object',    'expression',
+  'statement', 'jsx',
+  'any'
+]
+[2021-04-19 12:56:05] INFO: appx_spec [types] [
+  'react/element',         'react/html',
+  'react/state',           'react/effect',
+  'react/context',         'appx/form',
+  'appx/dialog',           'appx/input/text',
+  'appx/input/textarray',  'appx/input/switch',
+  'appx/input/select',     'appx/input/tabular',
+  'appx/input/collection', 'appx/input/submit',
+  'appx/input/reset',      'appx/input/rule',
+  'appx/table',            'appx/table/column',
+  'js/null',               'js/string',
+  'js/number',             'js/boolean',
+  'js/object',             'js/array',
+  'js/import',             'js/expression',
+  'js/statement',          'js/function',
+  'js/call',               'js/condition',
+  'js/map',                'js/reduce',
+  'js/filter',             'mui/style',
+  'mui/theme',             'route/path',
+  'route/context',         'appx/api'
+]
+[2021-04-19 12:56:05] ERROR: [SELECT * FROM _realm_app WHERE deleted = 0] -- Error: ER_ACCESS_DENIED_ERROR: Access denied for user 'appx'@'172.17.0.1' (using password: YES) [8]
+[2021-04-19 12:56:05] INFO: retry connection error -- Error: ER_ACCESS_DENIED_ERROR: Access denied for user 'appx'@'172.17.0.1' (using password: YES) [8]
+[2021-04-19 12:56:05] INFO: db_pool sleep [109] ms before retry connection [8] ...
+[2021-04-19 12:56:05] INFO: [DB POOL] connecting to localhost
+[2021-04-19 12:56:05] ERROR: [SELECT * FROM _realm_app WHERE deleted = 0] -- Error: ER_ACCESS_DENIED_ERROR: Access denied for user 'appx'@'172.17.0.1' (using password: YES) [7]
+[2021-04-19 12:56:05] INFO: retry connection error -- Error: ER_ACCESS_DENIED_ERROR: Access denied for user 'appx'@'172.17.0.1' (using password: YES) [7]
+[2021-04-19 12:56:05] INFO: db_pool sleep [942] ms before retry connection [7] ...
+[2021-04-19 12:56:06] INFO: [DB POOL] connecting to localhost
+[2021-04-19 12:56:06] ERROR: [SELECT * FROM _realm_app WHERE deleted = 0] -- Error: ER_ACCESS_DENIED_ERROR: Access denied for user 'appx'@'172.17.0.1' (using password: YES) [6]
+[2021-04-19 12:56:06] INFO: retry connection error -- Error: ER_ACCESS_DENIED_ERROR: Access denied for user 'appx'@'172.17.0.1' (using password: YES) [6]
+[2021-04-19 12:56:06] INFO: db_pool sleep [1220] ms before retry connection [6] ...
+[2021-04-19 12:56:07] INFO: [DB POOL] connecting to localhost
+[2021-04-19 12:56:07] ERROR: [SELECT * FROM _realm_app WHERE deleted = 0] -- Error: ER_ACCESS_DENIED_ERROR: Access denied for user 'appx'@'172.17.0.1' (using password: YES) [5]
+[2021-04-19 12:56:07] INFO: retry connection error -- Error: ER_ACCESS_DENIED_ERROR: Access denied for user 'appx'@'172.17.0.1' (using password: YES) [5]
+[2021-04-19 12:56:07] INFO: db_pool sleep [1907] ms before retry connection [5] ...
