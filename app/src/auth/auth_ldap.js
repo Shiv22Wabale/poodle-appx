@@ -76,7 +76,6 @@ let ldap_search = (ldap_conn, base_dn, options, callback) => {
             reject(err)
         }
     })
->>>>>>> ldap-fix
     p.then(value => {
         callback(null, value)
     }).catch(err => {
