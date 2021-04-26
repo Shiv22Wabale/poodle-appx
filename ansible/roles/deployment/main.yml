@@ -32,7 +32,7 @@
         state: absent
         path: "{{ tmp_file }}"
     - name: start init
-      command: "make -C {{ rpm_root }}/{{ package_name }} init"
+      command: "make -C {{ rpm_root }}/{{ package_name }} init-env INIT_PATH={{ rpm_root }}/config/init.yaml"
       args:
         warn: no
       register: start_init
