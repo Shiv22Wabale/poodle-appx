@@ -32,13 +32,14 @@
         state: absent
         path: "{{ tmp_file }}"
     - name: start init
-      command: "make -C {{ rpm_root }}/{{ package_name }} init-env INIT_PATH={{ rpm_root }}/config/init.yaml"
+      command: "export NODE=/portal/nodejs/node-v14.16.1-linux-x64/bin/node; make -C {{ rpm_root }}/{{ package_name }} init-env INIT_PATH={{ rpm_root }}/config/init.yaml"
       args:
         warn: no
+      ignore_errors: yes
       register: start_init
     - debug: msg="{{ start_init }}"
     - name: start app
-      command: "make -C {{ rpm_root }}/{{ package_name }} run"
+      command: "export NODE=/portal/nodejs/node-v14.16.1-linux-x64/bin/node; make -C {{ rpm_root }}/{{ package_name }} run"
       args:
         warn: no
       register: start_app
