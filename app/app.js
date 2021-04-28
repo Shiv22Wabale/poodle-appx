@@ -162,15 +162,32 @@ async function start() {
   //////////////////////////////////////////////////
   // start listening
   let port = 3000;
+  let isHTTPS = false;
+  const https_options = {};
   if( args.api_conf !== undefined ) {
       try {
         const api_conf = JSON.parse(fs.readFileSync(args.api_conf, 'utf8'))
         port = api_conf['api_port'] || 3000;
+        isHTTPS = api_conf['appx_server_is_https'] || false;
+
+        if ( isHTTPS ) {
+            https_options['key'] = fs.readFileSync(api_conf['appx_web_key_pem']);
+            https_options['cert'] = fs.readFileSync(api_conf['appx_web_cert_pem'])
+        }
       } catch (e) {
           console.log(`WARN: error ${e} occurred while reading the api config : ${args.api_conf} `)
       }
+
   }
-  var server = app.listen(port,'0.0.0.0', () => {
+
+  let server;
+  if( isHTTPS ) {
+    server = require('https').createServer(https_options, app);
+  } else {
+    server = require('http').createServer(app);
+  }
+
+  server.listen(port,'0.0.0.0', () => {
       console.log(`INFO: appx rest api server listening at http://${server.address().address}:${server.address().port}`)
   })
 }

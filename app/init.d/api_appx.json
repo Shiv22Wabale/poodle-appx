@@ -1,3 +1,6 @@
 {
-  "api_port": "{{{appx.init.appx_server_port}}}"
+  "api_port"              : "{{{appx.init.appx_server_port}}}",
+  "appx_server_is_https"  : {{#appx.init.appx_server_is_https}} "{{{appx.init.appx_server_is_https}}}" {{/appx.init.appx_server_is_https}} {{^appx.init.appx_server_is_https}} false {{/appx.init.appx_server_is_https}},
+  "appx_web_key_pem"      : "{{{appx.init.appx_web_key_pem}}}",
+  "appx_web_cert_pem"     : "{{{appx.init.appx_web_cert_pem}}}"
 }
