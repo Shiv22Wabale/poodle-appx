@@ -39,7 +39,7 @@
       register: start_init
     - debug: msg="{{ start_init }}"
     - name: start app
-      command: "export NODE=/portal/nodejs/node-v14.16.1-linux-x64/bin/node; make -C {{ rpm_root }}/{{ package_name }} run"
+      command: "export PATH=/portal/nodejs/node-v14.16.1-linux-x64/bin/:$PATH; make -C {{ rpm_root }}/{{ package_name }} run"
       args:
         warn: no
       register: start_app
